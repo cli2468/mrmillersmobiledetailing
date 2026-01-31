@@ -449,3 +449,37 @@ if (contactForm) {
   });
 }
 
+
+// Gallery Lightbox Logic
+const galleryItems = document.querySelectorAll('.gallery-item img');
+const lightbox = document.getElementById('gallery-lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxClose = document.querySelector('.lightbox-close');
+
+if (galleryItems.length > 0 && lightbox) {
+  galleryItems.forEach(item => {
+    item.addEventListener('click', () => {
+      lightbox.classList.add('active');
+      lightboxImg.src = item.src;
+      document.body.style.overflow = 'hidden'; // Prevent scrolling
+    });
+  });
+
+  const closeLightbox = () => {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = 'auto'; // Restore scrolling
+  };
+
+  lightboxClose.addEventListener('click', (e) => {
+    e.stopPropagation();
+    closeLightbox();
+  });
+
+  lightbox.addEventListener('click', closeLightbox);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+      closeLightbox();
+    }
+  });
+}
