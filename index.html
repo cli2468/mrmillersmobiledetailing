@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mobile Detailing | Premium Car Care</title>
+  <meta name="description"
+    content="Professional mobile car detailing services at your doorstep. Interior, exterior, and ceramic coating packages available." />
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="container navbar-container">
+      <div class="logo">
+        <img src="/assets/car_logo.png" alt="Mr. Miller's Mobile Detailing">
+        <div class="logo-text">
+          <span class="logo-line-1">Mr. Miller's</span>
+          <span class="logo-line-2">Mobile Detailing</span>
+        </div>
+      </div>
+      <nav class="nav-menu">
+        <ul class="nav-list">
+          <li><a href="#hero" class="nav-link">Home</a></li>
+          <li><a href="#gallery" class="nav-link">Gallery</a></li>
+          <li><a href="#services" class="nav-link">Services</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <a href="#contact" class="btn btn-primary nav-cta">Book Now</a>
+      <div class="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="hero" class="hero-section">
+      <img src="src/assets/hero-mustang-new.jpg" alt="Black Mustang Detail" class="hero-bg-img">
+      <div class="hero-overlay"></div>
+      <div class="container hero-content">
+        <h1 class="hero-title">Northwest Indiana's<br> <span class="highlight">Premier Mobile Detailing</span></h1>
+        <p class="hero-subtitle"><span class="highlight">We bring the showroom to you.</span></p>
+        <div class="hero-buttons hero-buttons-vertical">
+          <a href="tel:5551234567" class="btn btn-primary btn-pill hero-btn-phone"><i class='bx bxs-phone'></i> Call
+            (555) 123-4567</a>
+          <a href="#contact" class="btn btn-glass"><i class='bx bx-calendar'></i> Book Now</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="section gallery-section">
+      <!-- Custom Black Header Block -->
+      <div class="custom-header-block">
+        <h2 class="layered-title">
+          <span class="title-outline">OUR WORK</span>
+          <span class="title-solid">OUR WORK</span>
+        </h2>
+      </div>
+
+      <div class="container gallery-container">
+        <!-- Removed standard title, grid follows -->
+        <div class="gallery-grid bento">
+          <div class="gallery-item large"><img src="src/assets/gallery-silver-suv.jpg" alt="Silver SUV Side View"></div>
+          <div class="gallery-item small"><img src="src/assets/gallery-interior-mat.jpg" alt="Floor Mat Cleaning"></div>
+          <div class="gallery-item small"><img src="src/assets/gallery-interior-console.jpg"
+              alt="Interior Detail Console"></div>
+          <div class="gallery-item wide"><img src="src/assets/gallery-jeep-front.jpg" alt="Jeep Detailing"></div>
+        </div>
+
+        <!-- Comparison Slider -->
+        <div class="comparison-container">
+          <div class="featured-label">FEATURED</div>
+          <h3 class="comparison-title">Ceramic Coating Transformation</h3>
+          <div class="img-comp-container">
+            <div class="img-comp-img">
+              <img src="/src/assets/ceramic-after.png" width="100%">
+            </div>
+            <div class="img-comp-img img-comp-overlay">
+              <img src="/src/assets/ceramic-before.png" width="100%">
+            </div>
+          </div>
+          <p class="comparison-instruction">Drag the slider to see the difference</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section services-section">
+      <!-- Custom Header for Packages -->
+      <div class="custom-header-block" style="padding-top: 2rem;">
+        <h2 class="layered-title">
+          <span class="title-outline">PACKAGES</span>
+          <span class="title-solid">PACKAGES</span>
+        </h2>
+      </div>
+
+      <div class="container">
+        <!-- Package Tab Navigation -->
+        <div class="package-tabs">
+          <button class="package-tab" data-package="essential">Exterior Detail</button>
+          <button class="package-tab active" data-package="premium">Interior Detail</button>
+          <button class="package-tab" data-package="ultimate">Full Detail</button>
+        </div>
+
+        <!-- Package Card -->
+        <div class="package-card">
+          <div class="pkg-image-header">
+            <img src="src/assets/interior-detail-v2.jpg" alt="Interior Detailing Result" class="pkg-header-img"
+              style="object-position: center 67%">
+          </div>
+          <div class="pkg-body">
+            <h3 class="pkg-title">Interior Detail</h3>
+            <p class="pkg-desc">Deep cleaning for every surface inside your car. From steam cleaning to leather care.
+            </p>
+
+            <div class="pkg-marker-price">
+              Starting at <span class="marker-text animate">$120</span>
+            </div>
+
+            <div class="pkg-accordions">
+              <!-- Pricing Dropdown -->
+              <details class="pkg-accordion">
+                <summary>Pricing <i class='bx bx-chevron-down'></i></summary>
+                <div class="accordion-content">
+                  <div class="accordion-inner">
+                    <table class="pricing-table">
+                      <tr>
+                        <td>Sedan / Coupe</td>
+                        <td class="price-col">$120</td>
+                      </tr>
+                      <tr>
+                        <td>Small SUV / Truck</td>
+                        <td class="price-col">$140</td>
+                      </tr>
+                      <tr>
+                        <td>Large SUV / Minivan</td>
+                        <td class="price-col">$160</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </details>
+
+              <!-- What's Included Dropdown -->
+              <details class="pkg-accordion">
+                <summary>What's Included <i class='bx bx-chevron-down'></i></summary>
+                <div class="accordion-content">
+                  <div class="accordion-inner">
+                    <ul class="package-features-list">
+                      <li>
+                        <strong class="feature-title">Deep Cleaning:</strong>
+                        <span class="feature-desc">Steam cleaning and hot water extraction for carpets and
+                          upholstery.</span>
+                      </li>
+                      <li>
+                        <strong class="feature-title"> Leather Care:</strong>
+                        <span class="feature-desc">Gentle scrubbing and conditioning to restore leather softness.</span>
+                      </li>
+                      <li>
+                        <strong class="feature-title"> Interior Surface:</strong>
+                        <span class="feature-desc">Deep clean of dashboard, console, door panels, and cup
+                          holders.</span>
+                      </li>
+                      <li>
+                        <strong class="feature-title"> Vacuuming:</strong>
+                        <span class="feature-desc">Compreshensive vacuuming including trunk and hard-to-reach
+                          crevices.</span>
+                      </li>
+                      <li>
+                        <strong class="feature-title"> Windows:</strong>
+                        <span class="feature-desc">Crystal clear cleaning of all interior glass and sunroof.</span>
+                      </li>
+                    </ul>
+                  </div>
+              </details>
+            </div>
+
+            <div class="pkg-actions">
+              <a href="tel:5551234567" class="btn btn-dark btn-full">Call Now</a>
+              <a href="#contact" class="btn btn-outline-dark btn-full">Book Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Us Section (Restructured) -->
+    <section id="about" class="section about-section">
+      <!-- Why Us Header -->
+      <div class="custom-header-block" style="margin-bottom: 3rem;">
+        <h2 class="layered-title">
+          <span class="title-outline">WHY</span>
+          <span class="title-solid">WHY<br><span class="highlight marker-text"
+              style="--m-opacity: 4; --m-x: -0px; --m-y: -15px; --m-h: 10px;">MR MILLER</span></span>
+        </h2>
+      </div>
+
+      <div class="container">
+        <!-- 1. Polaroids (Moved from Reviews) -->
+        <div class="polaroid-collage">
+          <!-- Row 1 -->
+          <div class="polaroid" style="--tilt: -6deg; --x: 8px; --y: -12px; --z: 1;">
+            <div class="tape"></div>
+            <img src="https://placehold.co/600x600/6B21A8/white?text=Placeholder" alt="Detailing placeholder 1">
+          </div>
+          <div class="polaroid" style="--tilt: 2deg; --x: -5px; --y: 15px; --z: 2;">
+            <img src="https://placehold.co/600x600/FACC15/black?text=Placeholder" alt="Detailing placeholder 2">
+          </div>
+          <div class="polaroid" style="--tilt: -3deg; --x: -12px; --y: -10px; --z: 1;">
+            <div class="tape"></div>
+            <img src="https://placehold.co/600x600/6B21A8/white?text=Placeholder" alt="Detailing placeholder 3">
+          </div>
+          <!-- Row 2 -->
+          <div class="polaroid" style="--tilt: 8deg; --x: 12px; --y: 10px; --z: 3;">
+            <img src="https://placehold.co/600x600/FACC15/black?text=Placeholder" alt="Detailing placeholder 4">
+          </div>
+          <div class="polaroid" style="--tilt: -5deg; --x: 5px; --y: -6px; --z: 1;">
+            <div class="tape"></div>
+            <img src="https://placehold.co/600x600/6B21A8/white?text=Placeholder" alt="Detailing placeholder 5">
+          </div>
+          <div class="polaroid" style="--tilt: 4deg; --x: -8px; --y: 20px; --z: 2;">
+            <img src="https://placehold.co/600x600/FACC15/black?text=Placeholder" alt="Detailing placeholder 6">
+          </div>
+        </div>
+
+        <!-- Benefit Cards (Icon Left, Text Right) -->
+        <div class="benefit-cards">
+          <!-- We Come To You -->
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class='bx bxs-map-pin'></i>
+            </div>
+            <div class="benefit-text-block">
+              <h3 class="benefit-title">WE COME TO <span class="highlight">YOU</span></h3>
+              <p class="benefit-text">
+                Your time is valuable. That's why we bring the detail shop to you. Providing convenience and
+                professional services all at once!
+              </p>
+            </div>
+          </div>
+
+          <!-- 100% Satisfaction Guarantee -->
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class='bx bxs-badge-check'></i>
+            </div>
+            <div class="benefit-text-block">
+              <h3 class="benefit-title">100% SATISFACTION <span class="highlight">GUARANTEE</span></h3>
+              <p class="benefit-text">
+                Customer satisfaction is extremely important to us. We never leave a client unsatisfied. Just take a
+                look at our reviews!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Google Reviews Section -->
+    <section id="google-reviews" class="section google-reviews-section">
+      <div class="container">
+
+
+        <!-- Unified Reviews Header Card -->
+        <div class="unified-header-card">
+          <div class="unified-logos">
+            <span class="g-blue">G</span><span class="g-red">o</span><span class="g-yellow">o</span><span
+              class="g-blue">g</span><span class="g-green">l</span><span class="g-red">e</span>
+            <span class="logo-divider">|</span>
+            <span style="color: #1877F2; font-weight: 600;">Facebook</span>
+          </div>
+          <div class="unified-rating">
+            <span class="rating-number">5.0</span>
+            <span class="rating-stars">★★★★★</span>
+            <span class="rating-count">(97)</span>
+          </div>
+        </div>
+
+        <!-- Review Cards Container -->
+        <div class="google-reviews-stack">
+
+          <!-- Review 1 (With Image) -->
+          <a href="https://share.google/CLxWdi7DjZ7ht6x7v" target="_blank" class="review-card-link">
+            <div class="review-card-bubble">
+              <div class="review-card-body">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">Before and after photos for proof that he deserves all 5 stars! He got me in same
+                  day and charges very well. He spent time and effort to make my car look like I just drove it off the
+                  lot. Highly recommend Mr. Miller!</p>
+                <div class="review-image">
+                  <img src="/src/assets/review-interior.jpg" alt="Interior detail result">
+                </div>
+              </div>
+              <div class="review-card-footer">
+                <div class="reviewer-bubble">
+                  <div class="reviewer-avatar">M</div>
+                </div>
+                <div class="reviewer-info">
+                  <span class="reviewer-name">M Mata <i class='bx bxs-check-circle verified-badge'></i></span>
+                  <span class="review-date">on <span class="g-blue">G</span><span class="g-red">o</span><span
+                      class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span
+                      class="g-red">e</span></span>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <!-- Review 2 -->
+          <!-- Review 2 (S. Schapiro - Facebook) -->
+          <a href="https://www.facebook.com/profile.php?id=61572600913816&sk=reviews" target="_blank"
+            class="review-card-link">
+            <div class="review-card-bubble">
+              <div class="review-card-body">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">Highly recommend! Came to me, thorough and professional, and got my car looking
+                  brand new. Sooo happy with the results and will definitely be calling again!!</p>
+                <div class="review-image">
+                  <img src="/src/assets/review-bronco.jpg" alt="Interior detail result">
+                </div>
+              </div>
+              <div class="review-card-footer">
+                <div class="reviewer-bubble">
+                  <div class="reviewer-avatar">S</div>
+                </div>
+                <div class="reviewer-info">
+                  <span class="reviewer-name">S. Schapiro <i class='bx bxs-check-circle verified-badge'></i></span>
+                  <span class="review-date">on <span style="color: #1877F2; font-weight: 600;">Facebook</span></span>
+                </div>
+              </div>
+            </div>
+          </a>
+
+          <!-- Review 3 (Swapped with 2) -->
+          <a href="https://share.google/iFJtul6mku9CSpbk4" target="_blank" class="review-card-link">
+            <div class="review-card-bubble">
+              <div class="review-card-body">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">Trusted Mr Miller to service my car while I slept during the day for night
+                  shifts.
+                  I couldn't find a spot missed when I went to see how he preformed. Car looked the same as when I got
+                  it!
+                  Don't sleep on Mr Miller</p>
+              </div>
+              <div class="review-card-footer">
+                <div class="reviewer-bubble">
+                  <div class="reviewer-avatar">C</div>
+                </div>
+                <div class="reviewer-info">
+                  <span class="reviewer-name">C Gonzalez <i class='bx bxs-check-circle verified-badge'></i></span>
+                  <span class="review-date">on <span class="g-blue">G</span><span class="g-red">o</span><span
+                      class="g-yellow">o</span><span class="g-blue">g</span><span class="g-green">l</span><span
+                      class="g-red">e</span></span>
+                </div>
+              </div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact-gray-bg">
+      <div class="contact-container">
+        <h2 class="contact-title">Get in Touch with Us.</h2>
+        <p class="contact-subtitle">Contact us today for personalized advice and professional service.</p>
+
+        <form class="new-contact-form" id="contactForm">
+
+          <!-- Row 1: Names -->
+          <div class="form-row">
+            <input type="text" placeholder="First Name*" required class="form-input" aria-label="First Name">
+            <input type="text" placeholder="Last Name*" required class="form-input" aria-label="Last Name">
+          </div>
+
+          <!-- Row 2: Phone (No Icon) -->
+          <div class="form-row">
+            <input type="tel" id="phoneInput" placeholder="Phone*" required class="form-input"
+              aria-label="Phone Number">
+            <div class="error-message" id="phoneError">
+              <i class='bx bx-error-circle'></i> Please enter a valid phone number.
+            </div>
+          </div>
+
+          <!-- Row 3: Email -->
+          <div class="form-row">
+            <input type="email" placeholder="Email*" required class="form-input" aria-label="Email Address">
+            <div class="error-message" id="emailError">
+              <i class='bx bx-error-circle'></i> Enter an email address like example@mysite.com.
+            </div>
+          </div>
+
+          <!-- Row 4: Vehicle -->
+          <div class="form-row">
+            <input type="text" placeholder="Year, Make, and Model*" required class="form-input"
+              aria-label="Vehicle Details">
+          </div>
+
+          <!-- Row 5: Services -->
+          <div class="form-row">
+            <div class="select-wrapper">
+              <select class="form-input" required aria-label="Main Services Interested In">
+                <option value="" disabled selected>Main Services Interested In</option>
+                <option value="exterior">Exterior Detail</option>
+                <option value="interior">Interior Detail</option>
+                <option value="full">Full Detail</option>
+                <option value="ceramic">Ceramic Coating</option>
+              </select>
+              <i class='bx bx-chevron-down select-arrow'></i>
+            </div>
+          </div>
+
+          <!-- Row 6: Source -->
+          <div class="form-row">
+            <div class="select-wrapper">
+              <select class="form-input" aria-label="How Did You Hear About Us">
+                <option value="" disabled selected>How Did You Hear About Us</option>
+                <option value="google">Google</option>
+                <option value="facebook">Facebook</option>
+                <option value="instagram">Instagram</option>
+                <option value="friend">Friend/Family</option>
+                <option value="other">Other</option>
+              </select>
+              <i class='bx bx-chevron-down select-arrow'></i>
+            </div>
+          </div>
+
+          <!-- Row 7: Message -->
+          <div class="form-row">
+            <textarea placeholder="Message" rows="5" class="form-input" aria-label="Message"></textarea>
+          </div>
+
+          <!-- Row 8: Button -->
+          <div class="form-row">
+            <button type="submit" class="btn btn-black-full">Send Request</button>
+          </div>
+
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer">
+    <div class="footer-container">
+      <!-- Logo -->
+      <div class="footer-logo-wrapper">
+        <img src="/src/assets/footer-logo.png" alt="Mr Miller's Mobile Detailing" class="footer-logo">
+      </div>
+
+      <!-- Divider -->
+      <hr class="footer-divider">
+
+      <!-- Contact Info -->
+      <div class="footer-section">
+        <h4 class="footer-heading">Get in Touch</h4>
+        <div class="footer-links">
+          <a href="mailto:hello@mobiledetailing.com">hello@mobiledetailing.com</a>
+          <a href="tel:5551234567">(555) 123-4567</a>
+        </div>
+      </div>
+
+      <!-- Service Areas -->
+      <div class="footer-section">
+        <h4 class="footer-heading">Service Areas</h4>
+        <p class="service-areas-text">
+          Hobart, Portage, Merrillville, Gary, Griffith, Crown Point, Lake Station, Valparaiso
+        </p>
+      </div>
+
+      <!-- Social Icons -->
+      <div class="social-icons">
+        <a href="#" aria-label="Instagram"><i class='bx bxl-instagram'></i></a>
+        <a href="#" aria-label="Facebook"><i class='bx bxl-facebook-circle'></i></a>
+        <a href="#" aria-label="TikTok"><i class='bx bxl-tiktok'></i></a>
+      </div>
+
+      <!-- Copyright -->
+      <p class="copyright-text">&copy; 2024 Mr. Miller's Mobile Detailing. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/js/main.js"></script>
+</body>
+
+</html>
