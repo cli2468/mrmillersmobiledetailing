@@ -2129,18 +2129,38 @@ button {
   font-weight: 500;
 }
 
+@media (max-width: 600px) {
+  .google-reviews-section .container {
+    width: 80%;
+    /* Fixed typo from 80% to matching 95% */
+    max-width: none;
+    padding: 0;
+  }
+}
+
 /* ========== Unified Reviews Header Card ========== */
 .unified-header-card {
   background: #F3F4F6;
-  /* Light Gray Background */
   border-radius: 12px;
-  padding: 1.5rem 2rem;
+  padding: 1.5rem;
   text-align: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  max-width: 350px;
-  margin: 0 auto 2rem auto;
+  max-width: 500px;
+  /* Increased from 350px */
+  width: 95%;
+  /* Responsive width */
+  margin: 0 auto 1rem auto;
   border: 1px solid #e5e7eb;
-  /* Subtle border for definition */
+}
+
+@media (max-width: 600px) {
+  .unified-header-card {
+    width: 100%;
+    /* Spans full width of the now-95% container */
+    border-radius: 12px;
+    /* Restore rounded corners */
+    padding: 1rem;
+  }
 }
 
 .unified-logos {
@@ -2289,13 +2309,113 @@ button {
   font-size: 0.9rem;
 }
 
-/* Review Cards Stack */
-.google-reviews-stack {
+/* Review Carousel Styles */
+.reviews-carousel-wrapper {
+  position: relative;
+  max-width: 540px;
+  /* 500px content + 40px buffer */
+  width: auto;
+  /* Allow negative margins to expand the visual area */
+  margin: 0 -20px 2rem -20px;
+  padding: 0;
+  overflow: visible !important;
+}
+
+@media (min-width: 600px) {
+  .reviews-carousel-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    /* Respect max-width on desktop */
+  }
+}
+
+
+
+.reviews-carousel-viewport {
+  overflow: hidden;
+  width: 100%;
+  transition: height 0.4s ease;
+}
+
+.reviews-carousel-track {
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  max-width: 500px;
-  margin: 0 auto;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  /* Allow cards to have natural heights */
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  gap: 0;
+  width: 100%;
+}
+
+.reviews-carousel-track .review-card-link {
+  flex: 0 0 100%;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: block;
+  padding: 20px;
+  /* Keep padding equal for perfect center alignment */
+}
+
+/* Navigation Buttons */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.35);
+  /* Semi-transparent gray */
+  backdrop-filter: blur(4px);
+  /* Subtle glass effect */
+  -webkit-backdrop-filter: blur(4px);
+  border: none;
+  color: #fff;
+  /* White arrow */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, background 0.3s ease;
+  font-size: 1.5rem;
+}
+
+.carousel-btn:hover {
+  transform: translateY(-50%) scale(1.1);
+  background: rgba(0, 0, 0, 0.45);
+  /* Very slight darkening on hover */
+}
+
+.carousel-btn.prev {
+  left: -15px;
+  /* Nudged back out */
+}
+
+.carousel-btn.next {
+  right: -15px;
+  /* Nudged back out */
+}
+
+/* Mobile adjustments for buttons */
+@media (max-width: 600px) {
+  .carousel-btn.prev {
+    left: -5px;
+    /* Nudged back out */
+  }
+
+  .carousel-btn.next {
+    right: -5px;
+    /* Nudged back out */
+  }
+
+  .reviews-carousel-viewport {
+    overflow: hidden;
+  }
 }
 
 /* Clickable Review Card Link */
@@ -2328,6 +2448,12 @@ button {
 .review-card-body {
   padding: 1.5rem;
   padding-bottom: 1rem;
+}
+
+@media (max-width: 600px) {
+  .review-card-body {
+    padding: 1rem;
+  }
 }
 
 .review-card-body .review-stars {
@@ -2368,6 +2494,12 @@ button {
   padding: 1rem 1.5rem;
   border-top: 1px solid #f0f0f0;
   position: relative;
+}
+
+@media (max-width: 600px) {
+  .review-card-footer {
+    padding: 1rem;
+  }
 }
 
 .reviewer-bubble {

@@ -483,3 +483,83 @@ if (galleryItems.length > 0 && lightbox) {
     }
   });
 }
+
+// Reviews Carousel Logic
+const track = document.querySelector('.reviews-carousel-track');
+const slides = Array.from(track ? track.children : []);
+const nextBtn = document.querySelector('.carousel-btn.next');
+const prevBtn = document.querySelector('.carousel-btn.prev');
+
+if (track && slides.length > 0) {
+  let currentIndex = 0;
+
+  const updateSlidePosition = () => {
+    // Dynamic height calculation
+    const currentSlide = slides[currentIndex];
+    const viewport = document.querySelector('.reviews-carousel-viewport');
+    if (currentSlide && viewport) {
+      // OffsetHeight + buffer for the shadow (20px top/bottom padding + some breathing room)
+      const height = currentSlide.offsetHeight + 15;
+      viewport.style.height = `${height}px`;
+    }
+
+    // Standard logic: move by 100% of slide/viewport width per index
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+    // Hide buttons at ends completely
+    prevBtn.style.display = currentIndex === 0 ? 'none' : 'flex';
+    nextBtn.style.display = currentIndex === slides.length - 1 ? 'none' : 'flex';
+  };
+
+  // Set initial height
+  window.addEventListener('load', updateSlidePosition);
+  // Re-calculate on resize for responsiveness
+  window.addEventListener('resize', updateSlidePosition);
+
+  nextBtn.addEventListener('click', () => {
+    if (currentIndex < slides.length - 1) {
+      currentIndex++;
+      updateSlidePosition();
+    }
+  });
+
+  prevBtn.addEventListener('click', () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateSlidePosition();
+    }
+  });
+
+  // Mobile Touch/Swipe Support
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  track.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  track.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  }, { passive: true });
+
+  const handleSwipe = () => {
+    const swipeThreshold = 50;
+    if (touchStartX - touchEndX > swipeThreshold) {
+      // Swipe Left (Next)
+      if (currentIndex < slides.length - 1) {
+        currentIndex++;
+        updateSlidePosition();
+      }
+    } else if (touchEndX - touchStartX > swipeThreshold) {
+      // Swipe Right (Prev)
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateSlidePosition();
+      }
+    }
+  };
+
+  // Initialize
+  updateSlidePosition();
+}
