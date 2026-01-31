@@ -135,7 +135,7 @@ const packages = {
     category: 'EXTERIOR DETAIL',
     name: 'Exterior Detail',
     basePrice: '80', // For "Starting at $80"
-    image: 'src/assets/gallery-silver-suv.jpg',
+    image: 'assets/gallery-silver-suv.jpg',
     objectPosition: 'center 15%',
     desc: 'Top-tier exterior care for a showroom shine. Includes wash, clay bar, and wax.',
     pricing: [
@@ -156,7 +156,7 @@ const packages = {
     category: 'INTERIOR DETAIL',
     name: 'Interior Detail',
     basePrice: '120',
-    image: 'src/assets/interior-detail-v2.jpg',
+    image: 'assets/interior-detail-v2.jpg',
     objectPosition: 'center 67%', // Nudges interior details UP
     desc: 'Deep cleaning for every surface inside your car. From steam cleaning to leather care.',
     pricing: [
@@ -176,7 +176,7 @@ const packages = {
     category: 'FULL DETAIL',
     name: 'Full Detail',
     basePrice: '250',
-    image: 'src/assets/gallery-camaro.jpg',
+    image: 'assets/gallery-camaro.jpg',
     objectPosition: 'center 15%', // Nudges car DOWN
     desc: 'The complete package. A total revival of both interior and exterior to like-new condition.',
     pricing: [
