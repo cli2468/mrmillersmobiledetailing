@@ -1179,10 +1179,22 @@ button {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.stage-nav:hover {
-  background: var(--primary);
-  border-color: var(--primary);
-  transform: scale(1.1);
+/* Only apply persistent hover on devices that support it (Mouse) */
+@media (hover: hover) {
+  .stage-nav:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+  }
+}
+
+/* Active state for instant feedback on tap/click (Mobile & Desktop) */
+.stage-nav:active {
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(0.95);
+  /* Slight press effect */
+  transition: transform 0.1s;
 }
 
 /* Progress Bar on Stage */
