@@ -63,18 +63,47 @@
         </h2>
       </div>
 
-      <div class="container gallery-container">
-        <!-- Removed standard title, grid follows -->
-        <div class="gallery-grid bento">
-          <div class="gallery-item large animate-scale delay-1"><img src="assets/gallery-silver-suv.jpg"
-              alt="Silver SUV Side View"></div>
-          <div class="gallery-item small animate-scale delay-2"><img src="assets/gallery-interior-mat.jpg"
-              alt="Floor Mat Cleaning"></div>
-          <div class="gallery-item small animate-scale delay-3"><img src="assets/gallery-interior-console.jpg"
-              alt="Interior Detail Console"></div>
-          <div class="gallery-item wide animate-scale delay-4"><img src="assets/gallery-jeep-front.jpg"
-              alt="Jeep Detailing"></div>
+      <!-- Focal Showcase Gallery -->
+      <div class="focal-gallery-container animate-on-scroll">
+        <div class="focal-stage-wrapper">
+          <div class="focal-stage" id="mainStage">
+            <img src="assets/gallery-silver-suv.jpg" id="activeShowcaseImg" alt="Silver SUV Exterior Detail">
+            <div class="focal-nav-overlay">
+              <button class="stage-nav prev" id="stagePrev"><i class='bx bx-chevron-left'></i></button>
+              <button class="stage-nav next" id="stageNext"><i class='bx bx-chevron-right'></i></button>
+            </div>
+            <div class="focal-progress-bar">
+              <div class="focal-progress-fill" id="progressFill"></div>
+            </div>
+          </div>
+          <div class="focal-caption-block">
+            <h3 id="showcaseTitle">Exterior Refresh - Full Treatment</h3>
+            <p id="showcaseDesc">Complete exterior hand wash, clay bar decontamination, and premium wax protection for a
+              showroom finish.</p>
+          </div>
         </div>
+
+        <div class="focal-thumbnails" id="thumbnailStrip">
+          <div class="thumb active" data-index="0">
+            <img src="assets/gallery-silver-suv.jpg" alt="Silver SUV">
+            <div class="thumb-marker"></div>
+          </div>
+          <div class="thumb" data-index="1">
+            <img src="assets/gallery-jeep-front.jpg" alt="Jeep Off-Road">
+            <div class="thumb-marker"></div>
+          </div>
+          <div class="thumb" data-index="2">
+            <img src="assets/gallery-interior-console.jpg" alt="Interior Detail">
+            <div class="thumb-marker"></div>
+          </div>
+          <div class="thumb" data-index="3">
+            <img src="assets/gallery-interior-mat.jpg" alt="Floor Mat Detail">
+            <div class="thumb-marker"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container gallery-container">
 
         <!-- Comparison Slider -->
         <div class="comparison-container animate-on-scroll">

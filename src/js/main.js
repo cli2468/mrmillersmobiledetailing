@@ -521,82 +521,229 @@ if (galleryItems.length > 0 && lightbox) {
   });
 }
 
-// Reviews Carousel Logic
-const track = document.querySelector('.reviews-carousel-track');
-const slides = Array.from(track ? track.children : []);
-const nextBtn = document.querySelector('.carousel-btn.next');
-const prevBtn = document.querySelector('.carousel-btn.prev');
+// Work Showcase (Focal Gallery) Logic
+function initFocalShowcase() {
+  const stage = document.getElementById('mainStage');
+  const activeImg = document.getElementById('activeShowcaseImg');
+  const title = document.getElementById('showcaseTitle');
+  const desc = document.getElementById('showcaseDesc');
+  const thumbs = document.querySelectorAll('.thumb');
+  const prevBtn = document.getElementById('stagePrev');
+  const nextBtn = document.getElementById('stageNext');
+  const progressFill = document.getElementById('progressFill');
 
-if (track && slides.length > 0) {
+  if (!stage || !activeImg || thumbs.length === 0) return;
+
+  const showcaseData = [
+    {
+      img: 'assets/gallery-silver-suv.jpg',
+      title: 'Exterior Refresh - Full Treatment',
+      desc: 'Complete exterior hand wash, clay bar decontamination, and premium wax protection for a showroom finish.',
+      objPos: 'center 60%', // Focused slightly lower
+      scale: 1
+    },
+    {
+      img: 'assets/gallery-jeep-front.jpg',
+      title: 'Rough & Ready - Jeep Transformation',
+      desc: 'Deep cleaning and restoration for off-road vehicles. Bringing back the shine to every rugged detail.',
+      objPos: '60% 100%', // Focused slightly higher
+      scale: 1.2 // Zoomed in
+    },
+    {
+      img: 'assets/gallery-interior-console.jpg',
+      title: 'Interior Precision - Console Detail',
+      desc: 'Meticulous cleaning of all crevices, buttons, and screens using specialized tools and high-grade conditioners.',
+      objPos: 'center center',
+      scale: 1
+    },
+    {
+      img: 'assets/gallery-interior-mat.jpg',
+      title: 'Deep Cleaned - WeatherTech Restoration',
+      desc: 'Heavy-duty extraction and steam cleaning to remove years of salt, mud, and grime from all-weather mats.',
+      objPos: 'center 70%',
+      scale: 1
+    }
+  ];
+
   let currentIndex = 0;
+  let autoPlayTimer;
+  const duration = 5000;
 
-  const updateSlidePosition = () => {
-    // Dynamic height calculation
-    const currentSlide = slides[currentIndex];
-    const viewport = document.querySelector('.reviews-carousel-viewport');
-    if (currentSlide && viewport) {
-      // OffsetHeight + buffer for the shadow (20px top/bottom padding + some breathing room)
-      const height = currentSlide.offsetHeight + 15;
-      viewport.style.height = `${height}px`;
+  function updateGallery(index) {
+    currentIndex = index;
+    const data = showcaseData[currentIndex];
+
+    activeImg.classList.add('fade-out');
+
+    setTimeout(() => {
+      activeImg.src = data.img;
+      activeImg.alt = data.title;
+      // Apply custom styles
+      // transform-origin allows the 'scale' to zoom in on a specific point (e.g., 'center 20%')
+      activeImg.style.transformOrigin = data.objPos || 'center center';
+      activeImg.style.objectPosition = data.objPos || 'center center';
+      activeImg.style.transform = `scale(${data.scale || 1})`;
+
+      title.textContent = data.title;
+      desc.textContent = data.desc;
+
+      thumbs.forEach((t, i) => {
+        t.classList.toggle('active', i === currentIndex);
+      });
+
+      activeImg.classList.remove('fade-out');
+      resetProgressBar();
+    }, 400);
+  }
+
+  function nextSlide() {
+    let next = (currentIndex + 1) % showcaseData.length;
+    updateGallery(next);
+  }
+
+  function prevSlide() {
+    let prev = (currentIndex - 1 + showcaseData.length) % showcaseData.length;
+    updateGallery(prev);
+  }
+
+  function resetProgressBar() {
+    if (!progressFill) return;
+    progressFill.style.transition = 'none';
+    progressFill.style.width = '0%';
+    setTimeout(() => {
+      progressFill.style.transition = `width ${duration}ms linear`;
+      progressFill.style.width = '100%';
+    }, 50);
+  }
+
+  function startAutoPlay() {
+    stopAutoPlay();
+    autoPlayTimer = setInterval(nextSlide, duration);
+    resetProgressBar();
+  }
+
+  function stopAutoPlay() {
+    if (autoPlayTimer) clearInterval(autoPlayTimer);
+    if (progressFill) {
+      progressFill.style.transition = 'none';
+      progressFill.style.width = '0%';
     }
+  }
 
-    // Standard logic: move by 100% of slide/viewport width per index
-    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      nextSlide();
+      startAutoPlay();
+    });
+  }
 
-    // Hide buttons at ends completely
-    prevBtn.style.display = currentIndex === 0 ? 'none' : 'flex';
-    nextBtn.style.display = currentIndex === slides.length - 1 ? 'none' : 'flex';
-  };
+  if (prevBtn) {
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      prevSlide();
+      startAutoPlay();
+    });
+  }
 
-  // Set initial height
-  window.addEventListener('load', updateSlidePosition);
-  // Re-calculate on resize for responsiveness
-  window.addEventListener('resize', updateSlidePosition);
-
-  nextBtn.addEventListener('click', () => {
-    if (currentIndex < slides.length - 1) {
-      currentIndex++;
-      updateSlidePosition();
-    }
+  thumbs.forEach((thumb, index) => {
+    thumb.addEventListener('click', () => {
+      if (currentIndex === index) return;
+      updateGallery(index);
+      startAutoPlay();
+    });
   });
 
-  prevBtn.addEventListener('click', () => {
-    if (currentIndex > 0) {
-      currentIndex--;
-      updateSlidePosition();
-    }
-  });
+  stage.addEventListener('mouseenter', stopAutoPlay);
+  stage.addEventListener('mouseleave', startAutoPlay);
 
-  // Mobile Touch/Swipe Support
-  let touchStartX = 0;
-  let touchEndX = 0;
+  resetProgressBar();
+  autoPlayTimer = setInterval(nextSlide, duration);
+}
 
-  track.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
+// Reviews Carousel Logic
+function initReviewsCarousel() {
+  const track = document.querySelector('.reviews-carousel-track');
+  const slides = Array.from(track ? track.children : []);
+  const nextBtn = document.querySelector('.carousel-btn.next');
+  const prevBtn = document.querySelector('.carousel-btn.prev');
 
-  track.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-  }, { passive: true });
+  if (track && slides.length > 0) {
+    let currentIndex = 0;
 
-  const handleSwipe = () => {
-    const swipeThreshold = 50;
-    if (touchStartX - touchEndX > swipeThreshold) {
-      // Swipe Left (Next)
+    const updateSlidePosition = () => {
+      // Dynamic height calculation
+      const currentSlide = slides[currentIndex];
+      const viewport = document.querySelector('.reviews-carousel-viewport');
+      if (currentSlide && viewport) {
+        // OffsetHeight + buffer for the shadow (20px top/bottom padding + some breathing room)
+        const height = currentSlide.offsetHeight + 15;
+        viewport.style.height = `${height}px`;
+      }
+
+      // Standard logic: move by 100% of slide/viewport width per index
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+      // Hide buttons at ends completely
+      prevBtn.style.display = currentIndex === 0 ? 'none' : 'flex';
+      nextBtn.style.display = currentIndex === slides.length - 1 ? 'none' : 'flex';
+    };
+
+    // Set initial height
+    window.addEventListener('load', updateSlidePosition);
+    // Re-calculate on resize for responsiveness
+    window.addEventListener('resize', updateSlidePosition);
+
+    nextBtn.addEventListener('click', () => {
       if (currentIndex < slides.length - 1) {
         currentIndex++;
         updateSlidePosition();
       }
-    } else if (touchEndX - touchStartX > swipeThreshold) {
-      // Swipe Right (Prev)
+    });
+
+    prevBtn.addEventListener('click', () => {
       if (currentIndex > 0) {
         currentIndex--;
         updateSlidePosition();
       }
-    }
-  };
+    });
 
-  // Initialize
-  updateSlidePosition();
+    // Mobile Touch/Swipe Support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    track.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    track.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, { passive: true });
+
+    const handleSwipe = () => {
+      const swipeThreshold = 50;
+      if (touchStartX - touchEndX > swipeThreshold) {
+        // Swipe Left (Next)
+        if (currentIndex < slides.length - 1) {
+          currentIndex++;
+          updateSlidePosition();
+        }
+      } else if (touchEndX - touchStartX > swipeThreshold) {
+        // Swipe Right (Prev)
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateSlidePosition();
+        }
+      }
+    };
+
+    // Initialize
+    updateSlidePosition();
+  }
 }
+
+window.addEventListener('load', () => {
+  initFocalShowcase();
+  initReviewsCarousel();
+});

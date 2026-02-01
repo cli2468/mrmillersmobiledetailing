@@ -1111,79 +1111,207 @@ button {
   font-size: 0.875rem;
 }
 
-/* Gallery Section */
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: var(--spacing-md);
+/* Focal Showcase Gallery */
+.focal-gallery-container {
+  max-width: 1000px;
+  margin: -2rem auto 4rem;
+  padding: 0 1rem;
 }
 
-/* Bento Grid Layout */
-.gallery-grid.bento {
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 200px);
-  gap: 1rem;
-}
-
-.gallery-item {
-  border-radius: var(--radius-lg);
+.focal-stage-wrapper {
+  background: #fff;
+  border-radius: 24px;
   overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.focal-stage {
   position: relative;
-  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  overflow: hidden;
 }
 
-/* Bento size variants */
-.gallery-item.large {
-  grid-column: span 2;
-  grid-row: span 2;
-}
-
-.gallery-item.small {
-  grid-column: span 1;
-  grid-row: span 1;
-}
-
-.gallery-item.wide {
-  grid-column: span 2;
-  grid-row: span 1;
-}
-
-/* Nudge Jeep photo down */
-.gallery-item.wide img {
-  object-position: center bottom;
-}
-
-.gallery-item img {
+.focal-stage img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: opacity 0.4s ease-in-out;
 }
 
-.gallery-item:hover img {
-  filter: brightness(1.1);
+.focal-stage img.fade-out {
+  opacity: 0;
 }
 
-/* Mobile Bento Grid */
+/* Nav Overlay on Stage */
+.focal-nav-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5rem;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.stage-nav {
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  color: #fff;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stage-nav:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  transform: scale(1.1);
+}
+
+/* Progress Bar on Stage */
+.focal-progress-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 10;
+}
+
+.focal-progress-fill {
+  height: 100%;
+  background: var(--primary);
+  width: 0%;
+  /* Pulse handled via JS */
+}
+
+/* Caption Block Below Image */
+.focal-caption-block {
+  padding: 2rem;
+  text-align: left;
+  background: #fff;
+}
+
+.focal-caption-block h3 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #000;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.focal-caption-block p {
+  color: #555;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 800px;
+}
+
+/* Thumbnail Strip */
+.focal-thumbnails {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  overflow-x: auto;
+  padding: 1rem 0;
+  /* Vertical breathing room for hover effect */
+  scrollbar-width: none;
+  /* Hide scrollbar Firefox */
+}
+
+.focal-thumbnails::-webkit-scrollbar {
+  display: none;
+  /* Hide scrollbar Chrome/Safari */
+}
+
+.thumb {
+  flex: 0 0 120px;
+  height: 80px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%) brightness(0.8);
+  transition: all 0.3s ease;
+}
+
+.thumb-marker {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--primary);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.thumb.active {
+  border-color: var(--primary);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+}
+
+.thumb.active img {
+  filter: grayscale(0%) brightness(1);
+}
+
+.thumb.active .thumb-marker {
+  transform: scaleX(1);
+}
+
 @media (max-width: 768px) {
-  .gallery-grid.bento {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto;
+  .focal-gallery-container {
+    margin-top: -1rem;
+    padding: 0 0.5rem;
   }
 
-  .gallery-item.large {
-    grid-column: span 2;
-    grid-row: span 1;
-    height: 200px;
+  .focal-stage {
+    aspect-ratio: 4 / 3;
   }
 
-  .gallery-item.small {
-    height: 150px;
+  .focal-caption-block {
+    padding: 1.5rem 1rem;
   }
 
-  .gallery-item.wide {
-    grid-column: span 2;
-    height: 150px;
+  .focal-caption-block h3 {
+    font-size: 1.5rem;
+  }
+
+  .focal-caption-block p {
+    font-size: 0.95rem;
+  }
+
+  .thumb {
+    flex: 0 0 90px;
+    height: 60px;
   }
 }
 
@@ -1719,8 +1847,8 @@ button {
 
 .img-comp-container {
   position: relative;
-  height: 300px;
-  max-width: 600px;
+  height: 450px;
+  max-width: 900px;
   margin: 0 auto;
   overflow: hidden;
   border-radius: 24px;
@@ -1736,8 +1864,8 @@ button {
 
 .img-comp-img img {
   display: block;
-  width: 600px;
-  height: 300px;
+  width: 900px;
+  height: 450px;
   object-fit: cover;
 }
 
@@ -1804,14 +1932,23 @@ button {
 
 @media (max-width: 650px) {
   .img-comp-container {
-    height: 350px;
-    /* Taller on mobile */
+    height: 300px;
+    /* Reduced height from 450px */
+    width: calc(100% + 2rem);
+    /* 2 * spacing-md (1rem) */
+    margin-left: -1rem;
+    /* Negative margin to pull left */
+    margin-right: -1rem;
+    /* Negative margin to pull right */
+    border-radius: 12px;
+    /* Smaller radius for mobile */
   }
 
   .img-comp-img img {
     width: 100vw;
-    height: 350px;
-    /* Match container */
+    /* Fixed to viewport to prevent shrinking inside variable width wrapper */
+    height: 300px;
+    object-fit: cover;
   }
 }
 
@@ -2237,8 +2374,9 @@ button {
 }
 
 .unified-rating .rating-count {
-  color: #888;
+  color: #555;
   font-size: 1rem;
+  font-weight: 700;
 }
 
 /* ========== Side-by-Side Platform Cards ========== */
@@ -2679,5 +2817,5 @@ button {
 }
 
 .img-comp-transition {
-  transition: width 0.7s cubic-bezier(0.4, 0, 0.2, 1), left 0.7s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition: width 0.8s ease-in-out, left 0.8s ease-in-out !important;
 }
