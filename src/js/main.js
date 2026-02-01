@@ -68,20 +68,52 @@ function initComparisons() {
 
   function compareImages(img) {
     let slider, clicked = 0, w, h;
-    w = img.offsetWidth;
-    h = img.offsetHeight;
+    const container = img.parentElement;
 
-    img.style.width = (w / 2) + "px";
+    // Get dimensions from container
+    w = container.offsetWidth;
+    h = container.offsetHeight;
+
+    // Start at 20% width for the intro animation "hint"
+    img.style.width = "20%";
 
     slider = document.createElement("DIV");
     slider.setAttribute("class", "img-comp-slider");
     // Inject the icon directly to avoid font code mapping issues
     // Inject custom SVG: Slightly Shorter Wide Aspect Ratio
     slider.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="30" height="20" viewBox="0 0 30 20" fill="none" stroke="#1f2937" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M1 10h28M1 10l6-6m-6 6l6 6M29 10l-6-6m6 6l-6 6"/></svg>`;
-    img.parentElement.insertBefore(slider, img);
+    container.insertBefore(slider, img);
 
-    // slider.style.top = (h / 2) - (slider.offsetHeight / 2) + "px"; // Let CSS handle vertical centering
-    slider.style.left = (w / 2) - (slider.offsetWidth / 2) + "px";
+    // Initial slider position (matching 20% width)
+    // 27px is half of the 54px slider width defined in CSS
+    slider.style.left = "calc(20% - 27px)";
+
+    // Intersection Observer to trigger the "hint" animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Add transition classes for smooth movement
+          img.classList.add('img-comp-transition');
+          slider.classList.add('img-comp-transition');
+
+          // Fast and subtle move to the middle (50%)
+          setTimeout(() => {
+            img.style.width = "50%";
+            slider.style.left = "calc(50% - 27px)";
+          }, 50);
+
+          // Remove transition afterwards so user dragging isn't laggy
+          setTimeout(() => {
+            img.classList.remove('img-comp-transition');
+            slider.classList.remove('img-comp-transition');
+          }, 800);
+
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    observer.observe(container);
 
     slider.addEventListener("mousedown", slideReady);
     window.addEventListener("mouseup", slideFinish);
@@ -91,6 +123,9 @@ function initComparisons() {
     function slideReady(e) {
       e.preventDefault();
       clicked = 1;
+      // Remove transition immediately if user grabs it
+      img.classList.remove('img-comp-transition');
+      slider.classList.remove('img-comp-transition');
       window.addEventListener("mousemove", slideMove);
       window.addEventListener("touchmove", slideMove);
     }
@@ -103,8 +138,10 @@ function initComparisons() {
       let pos;
       if (clicked == 0) return false;
       pos = getCursorPos(e);
+      // Recalculate container width in case of resize
+      const currentW = container.offsetWidth;
       if (pos < 0) pos = 0;
-      if (pos > w) pos = w;
+      if (pos > currentW) pos = currentW;
       slide(pos);
     }
 
