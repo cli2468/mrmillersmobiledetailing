@@ -466,15 +466,56 @@ if (contactForm) {
     }
 
     if (hasError) {
-      return; // Stop submission
+      return;
     }
 
-    // Success
-    alert('Thank you! We will contact you soon.');
-    contactForm.reset();
+    // Success - Start Sending Logic
+    const submitBtn = contactForm.querySelector('#submitBtn');
+    const originalBtnText = submitBtn.innerText;
+
+    // UI state: Sending...
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Sending...";
+
+    const formData = new FormData(contactForm);
+
+    fetch(contactForm.action, {
+      method: contactForm.method,
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    }).then(response => {
+      if (response.ok) {
+        // UI state: Sent!
+        submitBtn.innerText = "Request Sent!";
+        submitBtn.style.backgroundColor = "#22c55e"; // Success green
+        contactForm.reset();
+
+        // Reset button after 5 seconds
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          submitBtn.innerText = originalBtnText;
+          submitBtn.style.backgroundColor = ""; // Reset to CSS default
+        }, 5000);
+      } else {
+        response.json().then(data => {
+          if (Object.hasOwn(data, 'errors')) {
+            alert(data["errors"].map(error => error["message"]).join(", "));
+          } else {
+            alert("Oops! There was a problem submitting your form");
+          }
+          submitBtn.disabled = false;
+          submitBtn.innerText = originalBtnText;
+        })
+      }
+    }).catch(error => {
+      alert("Oops! There was a problem submitting your form");
+      submitBtn.disabled = false;
+      submitBtn.innerText = originalBtnText;
+    });
   });
 }
-
 
 // Gallery Lightbox Logic
 const galleryItems = document.querySelectorAll('.gallery-item img');

@@ -427,17 +427,19 @@
         <p class="contact-subtitle animate-on-scroll">Contact us today for personalized advice and professional service.
         </p>
 
-        <form class="new-contact-form" id="contactForm">
+        <form class="new-contact-form" id="contactForm" action="https://formspree.io/f/xdaddjwe" method="POST">
 
           <!-- Row 1: Names -->
           <div class="form-row animate-on-scroll delay-1">
-            <input type="text" placeholder="First Name*" required class="form-input" aria-label="First Name">
-            <input type="text" placeholder="Last Name*" required class="form-input" aria-label="Last Name">
+            <input type="text" name="first_name" placeholder="First Name*" required class="form-input"
+              aria-label="First Name">
+            <input type="text" name="last_name" placeholder="Last Name*" required class="form-input"
+              aria-label="Last Name">
           </div>
 
           <!-- Row 2: Phone (No Icon) -->
           <div class="form-row animate-on-scroll delay-2">
-            <input type="tel" id="phoneInput" placeholder="Phone*" required class="form-input"
+            <input type="tel" id="phoneInput" name="phone" placeholder="Phone*" required class="form-input"
               aria-label="Phone Number">
             <div class="error-message" id="phoneError">
               <i class='bx bx-error-circle'></i> Please enter a valid phone number.
@@ -446,7 +448,8 @@
 
           <!-- Row 3: Email -->
           <div class="form-row animate-on-scroll delay-3">
-            <input type="email" placeholder="Email*" required class="form-input" aria-label="Email Address">
+            <input type="email" name="email" placeholder="Email*" required class="form-input"
+              aria-label="Email Address">
             <div class="error-message" id="emailError">
               <i class='bx bx-error-circle'></i> Enter an email address like example@mysite.com.
             </div>
@@ -454,14 +457,14 @@
 
           <!-- Row 4: Vehicle -->
           <div class="form-row animate-on-scroll delay-1">
-            <input type="text" placeholder="Year, Make, and Model*" required class="form-input"
+            <input type="text" name="vehicle" placeholder="Year, Make, and Model*" required class="form-input"
               aria-label="Vehicle Details">
           </div>
 
           <!-- Row 5: Services -->
           <div class="form-row animate-on-scroll delay-2">
             <div class="select-wrapper">
-              <select class="form-input" required aria-label="Main Services Interested In">
+              <select class="form-input" name="service" required aria-label="Main Services Interested In">
                 <option value="" disabled selected>Main Services Interested In</option>
                 <option value="exterior">Exterior Detail</option>
                 <option value="interior">Interior Detail</option>
@@ -475,7 +478,7 @@
           <!-- Row 6: Source -->
           <div class="form-row animate-on-scroll delay-3">
             <div class="select-wrapper">
-              <select class="form-input" aria-label="How Did You Hear About Us">
+              <select class="form-input" name="source" aria-label="How Did You Hear About Us">
                 <option value="" disabled selected>How Did You Hear About Us</option>
                 <option value="google">Google</option>
                 <option value="facebook">Facebook</option>
@@ -489,12 +492,12 @@
 
           <!-- Row 7: Message -->
           <div class="form-row animate-on-scroll">
-            <textarea placeholder="Message" rows="5" class="form-input" aria-label="Message"></textarea>
+            <textarea name="message" placeholder="Message" rows="5" class="form-input" aria-label="Message"></textarea>
           </div>
 
           <!-- Row 8: Button -->
           <div class="form-row animate-on-scroll">
-            <button type="submit" class="btn btn-black-full">Send Request</button>
+            <button type="submit" id="submitBtn" class="btn btn-black-full">Send Request</button>
           </div>
 
         </form>
