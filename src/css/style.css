@@ -787,6 +787,27 @@ button {
   box-shadow: var(--shadow-glow);
 }
 
+/* Staggered Content Reveal */
+.pkg-reveal-up {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.pkg-reveal-up.active {
+  animation: pkgRevealUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes pkgRevealUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.package-card {
+  transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.3s ease;
+}
+
 /* Package Card - Redesign */
 .package-card {
   max-width: 400px;
@@ -1324,6 +1345,178 @@ button {
   .thumb {
     flex: 0 0 90px;
     height: 60px;
+  }
+}
+
+/* Founder Portrait & Bio */
+.founder-portrait-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5rem;
+  margin-top: -1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.founder-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.founder-pill-frame {
+  width: 300px;
+  /* Increased from 264px */
+  height: 440px;
+  /* Increased from 384px */
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  border: 4px solid #fff;
+  background-color: #f0f0f0;
+  transform: rotate(-2deg);
+  transition: transform 0.3s ease;
+}
+
+.founder-pill-frame:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+
+.founder-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  /* Keep vertical control here */
+  transform: scale(1.25) translateX(-8%);
+  /* Nudge horizontal here (negative = left) */
+}
+
+.founder-bio {
+  max-width: 600px;
+  text-align: center;
+  padding: 0 1.5rem;
+}
+
+.founder-bio p.bio-intro {
+  color: #000;
+  font-size: 2.6rem;
+  /* Increased size per request */
+  line-height: 1.4;
+  font-weight: 800;
+  /* Bold impact */
+  margin-bottom: 2rem;
+  letter-spacing: -0.5px;
+}
+
+.line-mask {
+  display: block;
+  overflow: hidden;
+  line-height: normal;
+  /* Allow natural line height */
+}
+
+.anim-line {
+  display: block;
+  transform: translateY(110%);
+  will-change: transform;
+}
+
+.anim-line.in-view {
+  animation: slideUpMask 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* Stagger delays (applied only when in-view) */
+.anim-line.in-view:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.anim-line.in-view:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+@keyframes slideUpMask {
+  to {
+    transform: translateY(0);
+  }
+}
+
+.founder-bio p.bio-sub {
+  color: #000;
+  /* Sub font - lighter */
+  font-size: 1.05rem;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* Impact-Box Reveal Animation */
+.trust-reveal-text {
+  display: inline-block;
+  position: relative;
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  /* Slightly smaller per request */
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-top: 1.5rem;
+  padding: 0.4rem 1.2rem;
+  /* Reduced horizontal padding */
+  line-height: 1;
+  letter-spacing: 2px;
+
+  /* Text Style */
+  color: #fff;
+  z-index: 2;
+  opacity: var(--reveal-scale, 0);
+  /* Invisible until revealed */
+  transition: opacity 0.1s linear;
+
+  /* Background Box Logic */
+  background: transparent;
+}
+
+.trust-reveal-text::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #00509d;
+  /* Brand Blue */
+  z-index: -1;
+
+  /* Pure rectangular expansion */
+  transform: scaleX(var(--reveal-scale, 0));
+  transform-origin: center;
+  transition: opacity 0.3s ease;
+  /* JS handles transform smoothing now */
+}
+
+@media (max-width: 600px) {
+  .trust-reveal-text {
+    font-size: 2.2rem;
+    /* Re-ensured 2.3rem per request */
+    padding: 0.3rem 0.5rem;
+    /* Tightened horizontal padding further */
+  }
+}
+
+@media (max-width: 600px) {
+  .founder-bio p.bio-intro {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .founder-pill-frame {
+    width: 80vw;
+    /* Increased from 70vw */
+    height: 105vw;
+    max-width: 380px;
+    max-height: 520px;
   }
 }
 

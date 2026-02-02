@@ -280,35 +280,24 @@ if (packageTabs.length && packageCard) {
       const packageKey = tab.dataset.package;
       const pkg = packages[packageKey];
 
-      // Trigger "Returning" (retract) animation
-      const marker = packageCard.querySelector('.marker-text');
-      if (marker) {
-        marker.classList.remove('animate');
-        void marker.offsetWidth;
-        marker.classList.add('retract');
-      }
-
-      // Smooth transition for "returning" animation
-      packageCard.style.opacity = '0.4';
-      packageCard.style.transform = 'translateY(5px)';
-      packageCard.style.transition = 'all 0.15s ease';
+      // Fade out without horizontal shift
+      packageCard.style.opacity = '0';
 
       setTimeout(() => {
-        // Update card content - ACCORDION LAYOUT
+        // Update card content with reveal classes
         packageCard.innerHTML = `
-          <div class="pkg-image-header">
+          <div class="pkg-image-header pkg-reveal-up">
               <img src="${pkg.image}" alt="${pkg.name}" class="pkg-header-img" style="object-position: ${pkg.objectPosition}">
           </div>
           <div class="pkg-body">
-              <h3 class="pkg-title">${pkg.name}</h3>
-              <p class="pkg-desc">${pkg.desc}</p>
+              <h3 class="pkg-title pkg-reveal-up">${pkg.name}</h3>
+              <p class="pkg-desc pkg-reveal-up">${pkg.desc}</p>
               
-              <div class="pkg-marker-price">
+              <div class="pkg-marker-price pkg-reveal-up">
                 Starting at <span class="marker-text animate">$${pkg.basePrice}</span>
               </div>
               
-              <div class="pkg-accordions">
-                <!-- Pricing Dropdown -->
+              <div class="pkg-accordions pkg-reveal-up">
                 <details class="pkg-accordion">
                   <summary>Pricing <i class='bx bx-chevron-down'></i></summary>
                   <div class="accordion-content">
@@ -320,7 +309,6 @@ if (packageTabs.length && packageCard) {
                   </div>
                 </details>
 
-                <!-- What's Included Dropdown -->
                 <details class="pkg-accordion">
                   <summary>What's Included <i class='bx bx-chevron-down'></i></summary>
                   <div class="accordion-content">
@@ -338,28 +326,29 @@ if (packageTabs.length && packageCard) {
                 </details>
               </div>
               
-              <div class="pkg-actions">
+              <div class="pkg-actions pkg-reveal-up">
                 <a href="tel:5551234567" class="btn btn-dark btn-full">Call Now</a>
                 <a href="#contact" class="btn btn-outline-dark btn-full">Book Now</a>
               </div>
           </div>
         `;
 
-        // Reset Styles
+        // Fade back in static
+        void packageCard.offsetWidth; // Force Reflow
         packageCard.style.opacity = '1';
-        packageCard.style.transform = 'translateY(0)';
 
-        // Re-init stuff for new HTML
+        // Re-init accordions
         initAccordions(packageCard);
 
-        // Trigger Marker Animation Restart
-        const marker = packageCard.querySelector('.marker-text');
-        if (marker) {
-          marker.classList.remove('animate');
-          void marker.offsetWidth; // trigger reflow
-          marker.classList.add('animate');
-        }
-      }, 150);
+        // Stagger the reveal animations
+        const revealItems = packageCard.querySelectorAll('.pkg-reveal-up');
+        revealItems.forEach((item, index) => {
+          setTimeout(() => {
+            item.classList.add('active');
+          }, index * 100); // 100ms staggered wave
+        });
+
+      }, 300);
     });
   });
 }
@@ -746,4 +735,66 @@ function initReviewsCarousel() {
 window.addEventListener('load', () => {
   initFocalShowcase();
   initReviewsCarousel();
+});
+
+// Scroll Animation Observer (Bio Text)
+document.addEventListener('DOMContentLoaded', () => {
+  const observerOptions = {
+    threshold: 0.1, // Trigger earlier
+    rootMargin: '0px 0px -50px 0px' // Slightly less aggressive margin
+  };
+  const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        scrollObserver.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  const targets = document.querySelectorAll('.line-mask');
+  if (targets.length > 0) {
+    targets.forEach(el => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const animLine = entry.target.querySelector('.anim-line');
+            if (animLine) animLine.classList.add('in-view');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, observerOptions);
+      observer.observe(el);
+    });
+  }
+
+  // Knockout Text Scroll Scrubber (Blue Box Reveal)
+  const trustText = document.querySelector('.trust-reveal-text');
+  if (trustText) {
+    let currentScale = 0;
+    let targetScale = 0;
+    const lerpFactor = 0.1; // Lower = smoother/more lag, Higher = snappier
+
+    const updateReveal = () => {
+      const rect = trustText.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // Distance window: 85% to 75% (approx 10% of screen height)
+      const start = windowHeight * 0.85;
+      const end = windowHeight * 0.75;
+
+      targetScale = (start - rect.top) / (start - end);
+      targetScale = Math.min(Math.max(targetScale, 0), 1);
+
+      // Smooth interpolation
+      currentScale += (targetScale - currentScale) * lerpFactor;
+
+      // Update property
+      trustText.style.setProperty('--reveal-scale', currentScale);
+
+      requestAnimationFrame(updateReveal);
+    };
+
+    updateReveal();
+  }
 });
