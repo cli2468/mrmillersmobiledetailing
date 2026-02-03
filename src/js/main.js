@@ -385,7 +385,7 @@ document.querySelectorAll('.polaroid').forEach((el, i) => {
   el.classList.add('animate-on-scroll', `delay-${(i % 4) + 1}`);
   animationObserver.observe(el);
 });
-document.querySelectorAll('.package-card, .comparison-container, .contact-form').forEach(el => {
+document.querySelectorAll('.package-card, .contact-form').forEach(el => {
   el.classList.add('animate-on-scroll');
   animationObserver.observe(el);
 });
@@ -575,7 +575,7 @@ function initFocalShowcase() {
     {
       img: 'assets/gallery-jeep-front.jpg',
       title: 'Rough & Ready - Jeep Transformation',
-      desc: 'Deep cleaning and restoration for off-road vehicles. Bringing back the shine to every rugged detail.',
+      desc: "Deep cleaning and restoration for off-road vehicles. No matter where you go, we've got your stains covered.",
       objPos: '60% 100%', // Focused slightly higher
       scale: 1.2 // Zoomed in
     },
@@ -583,7 +583,7 @@ function initFocalShowcase() {
       img: 'assets/gallery-interior-console.jpg',
       title: 'Interior Precision - Console Detail',
       desc: 'Meticulous cleaning of all crevices, buttons, and screens using specialized tools and high-grade conditioners.',
-      objPos: 'center center',
+      objPos: 'center 30%',
       scale: 1
     },
     {
