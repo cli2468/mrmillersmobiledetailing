@@ -167,64 +167,60 @@ window.addEventListener('load', initComparisons);
 // Package Tab Switching
 const packages = {
   essential: {
-    category: 'EXTERIOR DETAIL',
-    name: 'Exterior Detail',
-    basePrice: '80', // For "Starting at $80"
-    image: 'assets/gallery-silver-suv.jpg',
-    objectPosition: 'center 15%',
-    desc: 'Top-tier exterior care for a showroom shine. Includes wash, clay bar, and wax.',
+    category: 'INTERIOR ESSENTIAL',
+    name: 'Interior Essential',
+    basePrice: '120',
+    image: 'assets/gallery-interior-console.jpg',
+    objectPosition: 'center center',
+    desc: 'A professional maintenance service for vehicles that need a regular refresh to keep the cabin in peak condition.',
     pricing: [
-      { type: 'Sedan / Coupe', cost: '$80' },
-      { type: 'Small SUV / Truck', cost: '$100' },
-      { type: 'Large SUV / Minivan', cost: '$120' }
+      { type: 'Sedan / Coupe', cost: '$120' },
+      { type: 'Small SUV / Truck', cost: '$150' },
+      { type: 'Large SUV / Minivan', cost: '$180' }
     ],
     features: [
-      { title: 'Exterior Detailing', desc: 'Thorough hand wash, pre-rinse, foam treatment, and door jamb cleaning.' },
-      { title: 'Wheel Treatment', desc: 'Deep cleaning of wheels, inner barrels, and wheel wells for a renewed look.' },
-      { title: 'Decontamination', desc: 'Clay bar and iron removal to smooth out paint roughness.' },
-      { title: 'Protection', desc: 'Spray wax sealant applied for months of hydrophobic protection and shine.' },
-      { title: 'Dressing', desc: 'Tires and trim dressed for a non-greasy, satin factory finish.' },
-      { title: 'Glass', desc: 'Streak-free cleaning of all exterior windows and mirrors.' }
+      { title: 'Full Cabin Vacuum', desc: 'Detailed extraction of dust and debris from all carpets, mats, and hard-to-reach crevices.' },
+      { title: 'Surface Sanitization', desc: 'Thorough wipe down and sanitization of the dashboard, center console, and door panels.' },
+      { title: 'HD Glass Cleaning', desc: 'Streak-free cleaning of all interior windows and mirrors for high-definition clarity.' }
     ]
   },
   premium: {
-    category: 'INTERIOR DETAIL',
-    name: 'Interior Detail',
-    basePrice: '120',
+    category: 'INTERIOR RESTORATION',
+    name: 'Interior Restoration',
+    basePrice: '250',
     image: 'assets/interior-detail-v2.jpg',
-    objectPosition: 'center 67%', // Nudges interior details UP
-    desc: 'Deep cleaning for every surface inside your car. From steam cleaning to leather care.',
+    objectPosition: 'center 67%',
+    desc: "For vehicles that need a total reset. We go beneath the surface with deep steam-cleaning to lift embedded stains.",
     pricing: [
-      { type: 'Sedan / Coupe', cost: '$120' },
-      { type: 'Small SUV / Truck', cost: '$140' },
-      { type: 'Large SUV / Minivan', cost: '$160' }
+      { type: 'Sedan / Coupe', cost: '$250' },
+      { type: 'Small SUV / Truck', cost: '$325' },
+      { type: 'Large SUV / Minivan', cost: '$400' }
     ],
     features: [
-      { title: 'Deep Cleaning', desc: 'Steam cleaning and hot water extraction for carpets and upholstery.' },
-      { title: 'Leather Care', desc: 'Gentle scrubbing and conditioning to restore leather softness.' },
-      { title: 'Interior Surface', desc: 'Deep clean of dashboard, console, door panels, and cup holders.' },
-      { title: 'Vacuuming', desc: 'Compreshensive vacuuming including trunk and hard-to-reach crevices.' },
-      { title: 'Windows', desc: 'Crystal clear cleaning of all interior glass and sunroof.' }
+      { title: 'Includes all services from Interior Essential and more', desc: '' },
+      { title: 'Deep Shampooing', desc: 'Hot water extraction and shampooing for carpets and fabric seats to lift deep stains.' },
+      { title: 'Steam Sanitization', desc: 'High-heat steam treatment to kill bacteria and loosen grime in every vent and seam.' },
+      { title: 'UV Protection', desc: 'Premium dressing applied to all plastics to restore color and provide UV defense.' },
+      { title: 'Spot Correction', desc: 'Targeted treatment for minor headliner spots and stubborn upholstery stains.' }
     ]
   },
   ultimate: {
-    category: 'FULL DETAIL',
-    name: 'Full Detail',
-    basePrice: '250',
+    category: 'SHOWROOM EXTERIOR',
+    name: 'Showroom Exterior',
+    basePrice: '95',
     image: 'assets/gallery-camaro.jpg',
-    objectPosition: 'center 15%', // Nudges car DOWN
-    desc: 'The complete package. A total revival of both interior and exterior to like-new condition.',
+    objectPosition: 'center 15%',
+    desc: 'A meticulous hand-wash and protection treatment that removes contaminants and seals your paint for a lasting gloss.',
     pricing: [
-      { type: 'Sedan / Coupe', cost: '$250' },
-      { type: 'Small SUV / Truck', cost: '$280' },
-      { type: 'Large SUV / Minivan', cost: '$320' }
+      { type: 'Sedan / Coupe', cost: '$95' },
+      { type: 'Small SUV / Truck', cost: '$120' },
+      { type: 'Large SUV / Minivan', cost: '$150' }
     ],
     features: [
-      { title: 'Complete Restoration', desc: 'Includes everything from both Interior and Exterior packages.' },
-      { title: 'Engine Bay', desc: 'Safe degreasing and dressing of engine bay plastics.' },
-      { title: 'Headlights', desc: 'Light restoration to improve visibility and clarity.' },
-      { title: 'Premium Protection', desc: 'Upgraded 6-month silica sealant for superior gloss.' },
-      { title: 'Pet Hair', desc: 'Thorough removal of pet hair from all fabric surfaces.' }
+      { title: 'Foam Hand Wash', desc: 'Multi-stage foam bath and gentle hand wash using premium pH-balanced soaps.' },
+      { title: 'Decontamination', desc: 'Removal of bugs, tar, and iron particles that standard washing can\'t touch.' },
+      { title: 'Wheel Perfection', desc: 'Deep cleaning of wheel barrels, tires, and wheel wells with a satin finish dressing.' },
+      { title: 'Paint Sealant', desc: 'High-grade wax sealant applied for months of hydrophobic protection and deep shine.' }
     ]
   }
 };
@@ -316,8 +312,7 @@ if (packageTabs.length && packageCard) {
                       <ul class="package-features-list">
                         ${pkg.features.map(f => `
                           <li>
-                            <strong class="feature-title">${f.title}:</strong> 
-                            <span class="feature-desc">${f.desc}</span>
+                            ${f.desc ? `<strong class="feature-title">${f.title}:</strong> <span class="feature-desc">${f.desc}</span>` : `<strong class="feature-title">${f.title}</strong>`}
                           </li>
                         `).join('')}
                       </ul>

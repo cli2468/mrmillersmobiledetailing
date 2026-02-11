@@ -769,18 +769,26 @@ button {
   justify-content: center;
   gap: 0.5rem;
   margin-bottom: var(--spacing-lg);
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .package-tab {
-  padding: 0.75rem 2rem;
+  flex: 1;
+  padding: 1.1rem 0.5rem;
   border: 2px solid var(--bg-card-hover);
   background-color: transparent;
   color: var(--text-main);
   font-family: var(--font-heading);
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   cursor: pointer;
   transition: all 0.3s ease;
   border-radius: var(--radius-md);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .package-tab:hover {
