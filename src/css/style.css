@@ -577,6 +577,7 @@ button {
   margin-bottom: var(--spacing-md);
   color: #ffffff;
   /* Force white on dark hero overlay */
+  text-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
   opacity: 0;
   animation: smoothPopIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   animation-delay: 0.1s;
@@ -592,6 +593,7 @@ button {
   font-size: 1.125rem;
   color: rgba(255, 255, 255, 0.85);
   /* Light white on dark hero */
+  text-shadow: 0px 1px 6px rgba(0, 0, 0, 0.25);
   margin-bottom: var(--spacing-lg);
   max-width: 500px;
   opacity: 0;
@@ -724,7 +726,7 @@ button {
 
   .hamburger {
     display: block;
-    margin-right: 10px;
+    margin-right: 0px;
     margin-top: -110px;
     z-index: 1001;
     /* Above the overlay */
