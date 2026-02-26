@@ -3028,3 +3028,339 @@ button {
 .img-comp-transition {
   transition: width 0.8s ease-in-out, left 0.8s ease-in-out !important;
 }
+
+/* ==========================================================================
+   DESKTOP REBUILD (1024px+)
+   Optimized for High-End Experience (better-ui)
+   ========================================================================== */
+
+/* --- Visibility & Isolation --- */
+.hero-desktop-layout {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+
+  /* Hide Mobile Content */
+  .hero-mobile-layout {
+    display: none;
+  }
+
+  /* --- Navigation Rebuild --- */
+  .navbar {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+      backdrop-filter 0.4s ease,
+      border-bottom 0.4s ease;
+    border-bottom: 1px solid transparent;
+    pointer-events: auto;
+  }
+
+  .navbar.scrolled {
+    background-color: rgba(15, 15, 20, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 100%;
+    width: 100%;
+    padding: 0 4% 0 2%;
+    /* Reduced left padding to move logo further left */
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    /* Increased gap to move text further right */
+    pointer-events: auto;
+  }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* Restore User's Manual Logo Sizing */
+  .logo .logo-line-1 {
+    font-size: 1.3rem !important;
+    margin-bottom: 2px;
+  }
+
+  .logo .logo-line-2 {
+    font-size: 1.1rem !important;
+  }
+
+  .logo img {
+    height: 240px !important;
+    width: auto;
+    margin-right: -100px;
+    position: relative;
+    top: 25px;
+    /* Moved down from -20px */
+    left: -20px;
+    /* Nudged left */
+  }
+
+
+  /* Center the menu absolutely but prevent overlap */
+  .nav-menu {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    width: auto;
+    background: transparent;
+    opacity: 1;
+    visibility: visible;
+    padding: 0;
+    z-index: 5;
+  }
+
+  .nav-list {
+    flex-direction: row;
+    gap: 3rem;
+  }
+
+  .nav-link {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.8) !important;
+    position: relative;
+    padding: 0.5rem 0;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-link:hover {
+    color: #fff !important;
+  }
+
+  .nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .nav-cta {
+    display: inline-block;
+    padding: 0.6rem 1.4rem;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 50px;
+    /* Pill shape */
+    background-color: var(--primary);
+    color: #fff !important;
+    border: 1px solid var(--primary);
+    width: auto;
+  }
+
+  .nav-cta:hover {
+    background-color: #fff;
+    color: var(--primary) !important;
+    transform: translateY(-2px);
+  }
+
+  /* --- Hero Rebuild (Explicit Grid) --- */
+  .hero-section {
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    display: block;
+    position: static;
+    overflow: visible;
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: 55% 45%;
+    min-height: 100dvh;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    background: linear-gradient(108deg, #06101f 0%, #0d1a33 60%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 7rem 4rem 4rem 8vw;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -80px;
+    width: 120px;
+    height: 100%;
+    background: linear-gradient(to right, #0d1a33, transparent);
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .hero-right {
+    position: relative;
+    clip-path: polygon(8% 0, 100% 0, 100% 100%, 0% 100%);
+  }
+
+  .hero-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .hero-right::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right,
+        rgba(6, 16, 31, 0.65) 0%,
+        rgba(6, 16, 31, 0.25) 40%,
+        rgba(6, 16, 31, 0.1) 100%);
+    z-index: 1;
+  }
+
+  .hero-stats {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 8vw;
+    display: flex;
+    gap: 3rem;
+    z-index: 4;
+    pointer-events: none;
+  }
+
+  .hero-stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    color: #fff;
+    line-height: 1;
+    display: block;
+  }
+
+  .hero-stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+    margin-top: 0.2rem;
+    display: block;
+  }
+
+  .hero-eyebrow {
+    color: var(--primary);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+    display: block;
+  }
+
+  .hero-desktop-title {
+    font-size: 5.5rem;
+    line-height: 0.85;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    font-family: var(--font-heading);
+  }
+
+  .blue-text {
+    color: var(--primary);
+  }
+
+  .hero-desktop-title span {
+    display: block;
+    transform: translateY(30px);
+    opacity: 0;
+    animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .hero-desktop-title .line-2 {
+    animation-delay: 0.05s;
+  }
+
+  .hero-desktop-title .line-3 {
+    animation-delay: 0.1s;
+  }
+
+  .hero-desktop-subtitle {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    max-width: 45ch;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-desktop-actions {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .hero-btn-phone {
+    border-radius: 50px;
+    background-color: #2563EB;
+    color: #fff !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    border: none;
+    font-weight: 600;
+  }
+
+  .hero-btn-book {
+    border-radius: 50px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #fff !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+}
+
+@keyframes slideUpFade {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
