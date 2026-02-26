@@ -1262,6 +1262,7 @@ button {
     transform: translateY(-4px);
     border-color: #e2e8f0;
     /* Unchanged on hover for base */
+    transition-delay: 0s !important;
   }
 
   /* Featured Card (.pkg-featured) */
@@ -1275,6 +1276,7 @@ button {
     box-shadow: 0 0 0 1px #2563EB, 0 24px 60px -10px rgba(37, 99, 235, 0.3);
     /* shadow deepens */
     transform: translateY(-12px);
+    transition-delay: 0s !important;
   }
 
   /* Featured Top Banner */
@@ -3811,4 +3813,9 @@ button {
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+/* Final Hover Fix - Resetting all delays on hover to ensure immediate response */
+.pkg:hover {
+  transition-delay: 0s !important;
 }
