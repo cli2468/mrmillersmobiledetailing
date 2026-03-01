@@ -512,6 +512,165 @@ if (contactForm) {
   });
 }
 
+// -- Desktop Contact Form Logic --
+const desktopForm = document.querySelector('.desktop-contact-form');
+if (desktopForm) {
+  const dPhoneInput = desktopForm.querySelector('input[type="tel"]');
+  const dPhoneError = document.getElementById('desktopPhoneError');
+  const dEmailInput = desktopForm.querySelector('input[type="email"]');
+  const dEmailError = document.getElementById('desktopEmailError');
+
+  // Phone Auto-Formatting (XXX) XXX-XXXX
+  if (dPhoneInput) {
+    dPhoneInput.addEventListener('input', () => {
+      let x = dPhoneInput.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+      dPhoneInput.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+    });
+
+    // Phone Validation on Blur
+    dPhoneInput.addEventListener('blur', () => {
+      if (dPhoneInput.value.length > 0 && dPhoneInput.value.length < 14) {
+        dPhoneError.classList.add('visible');
+        dPhoneInput.classList.add('input-error');
+      } else {
+        dPhoneError.classList.remove('visible');
+        dPhoneInput.classList.remove('input-error');
+      }
+    });
+
+    dPhoneInput.addEventListener('focus', () => {
+      dPhoneError.classList.remove('visible');
+      dPhoneInput.classList.remove('input-error');
+    });
+  }
+
+  // Email Validation on Blur
+  if (dEmailInput) {
+    dEmailInput.addEventListener('blur', () => {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (dEmailInput.value && !emailRegex.test(dEmailInput.value)) {
+        dEmailError.classList.add('visible');
+        dEmailInput.classList.add('input-error');
+      } else {
+        dEmailError.classList.remove('visible');
+        dEmailInput.classList.remove('input-error');
+      }
+    });
+
+    dEmailInput.addEventListener('focus', () => {
+      dEmailError.classList.remove('visible');
+      dEmailInput.classList.remove('input-error');
+    });
+  }
+
+  // Custom Dropdown Logic
+  const customSelects = desktopForm.querySelectorAll('.custom-select');
+  customSelects.forEach(select => {
+    const trigger = select.querySelector('.custom-select-trigger');
+    const options = select.querySelectorAll('.custom-select-option');
+    const hiddenInput = select.previousElementSibling; // The hidden input
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      // Close all other open selects first
+      customSelects.forEach(other => {
+        if (other !== select) other.classList.remove('open');
+      });
+      select.classList.toggle('open');
+    });
+
+    options.forEach(option => {
+      option.addEventListener('click', () => {
+        // Update trigger text
+        trigger.querySelector('span').textContent = option.textContent;
+        trigger.classList.remove('placeholder-text');
+
+        // Update hidden input value
+        hiddenInput.value = option.dataset.value;
+
+        // Mark selected
+        options.forEach(o => o.classList.remove('selected'));
+        option.classList.add('selected');
+
+        // Close dropdown
+        select.classList.remove('open');
+      });
+    });
+  });
+
+  // Close dropdowns on outside click
+  document.addEventListener('click', () => {
+    customSelects.forEach(select => select.classList.remove('open'));
+  });
+
+  // Form Submission
+  desktopForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let hasError = false;
+
+    // Validate phone
+    if (dPhoneInput && dPhoneInput.value.length < 14) {
+      dPhoneError.classList.add('visible');
+      dPhoneInput.classList.add('input-error');
+      hasError = true;
+    }
+
+    // Validate email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (dEmailInput && !emailRegex.test(dEmailInput.value)) {
+      dEmailError.classList.add('visible');
+      dEmailInput.classList.add('input-error');
+      hasError = true;
+    }
+
+    if (hasError) return;
+
+    const submitBtn = desktopForm.querySelector('.btn-primary-full');
+    const originalText = submitBtn.innerText;
+
+    submitBtn.disabled = true;
+    submitBtn.innerText = "Sending...";
+
+    const formData = new FormData(desktopForm);
+
+    fetch(desktopForm.action, {
+      method: desktopForm.method,
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    }).then(response => {
+      if (response.ok) {
+        submitBtn.innerText = "Request Sent!";
+        submitBtn.style.backgroundColor = "#22c55e";
+        desktopForm.reset();
+
+        // Reset custom selects
+        customSelects.forEach(select => {
+          const trigger = select.querySelector('.custom-select-trigger span');
+          const options = select.querySelectorAll('.custom-select-option');
+          const defaultText = select.dataset.name === 'service' ? 'Select a package' : 'Select one';
+          trigger.textContent = defaultText;
+          select.querySelector('.custom-select-trigger').classList.add('placeholder-text');
+          options.forEach(o => o.classList.remove('selected'));
+        });
+
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          submitBtn.innerText = originalText;
+          submitBtn.style.backgroundColor = "";
+        }, 5000);
+      } else {
+        alert("Oops! There was a problem submitting your form.");
+        submitBtn.disabled = false;
+        submitBtn.innerText = originalText;
+      }
+    }).catch(() => {
+      alert("Oops! There was a problem submitting your form.");
+      submitBtn.disabled = false;
+      submitBtn.innerText = originalText;
+    });
+  });
+}
+
 // Gallery Lightbox Logic
 const galleryItems = document.querySelectorAll('.gallery-item img');
 const lightbox = document.getElementById('gallery-lightbox');
