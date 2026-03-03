@@ -734,7 +734,7 @@ function initFocalShowcase() {
     {
       img: 'assets/gallery-silver-suv.jpg',
       title: 'Exterior Refresh - Full Treatment',
-      desc: 'Complete exterior hand wash, clay bar decontamination, and premium wax protection for a showroom finish.',
+      desc: 'Complete exterior hand wash and premium wax protection for a showroom finish.',
       objPos: 'center 60%', // Focused slightly lower
       scale: 1
     },

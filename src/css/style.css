@@ -1500,11 +1500,11 @@ button {
   }
 
   .ceramic-heading {
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-size: 1.3rem;
+    font-weight: 800;
     color: #0f172a;
-    text-transform: none;
-    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
   }
 
   .ceramic-sub {
@@ -1517,8 +1517,14 @@ button {
   .ceramic-btn {
     white-space: nowrap;
     border-radius: 0.5rem;
-    /* Match card buttons */
+    color: white !important;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
+
+  /* Match card buttons */
 }
 
 /* Pricing Disclaimer */
@@ -3059,7 +3065,6 @@ button {
 
   .custom-select.open .custom-select-trigger {
     border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
@@ -3094,7 +3099,7 @@ button {
 
   .custom-select.open .custom-select-options {
     max-height: 260px;
-    overflow-y: auto;
+    overflow: hidden;
     opacity: 1;
   }
 
