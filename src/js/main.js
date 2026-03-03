@@ -950,7 +950,7 @@ function initDesktopReviewsCarousel() {
 
   if (!coverflow || !track || slides.length === 0 || !nextBtn || !prevBtn || !nav) return;
 
-  let currentIndex = 1; // Start on 2nd card so sides are visible
+  let currentIndex = 2; // Start on 3rd card for perfect symmetry
   let isAnimating = false;
 
   const updateArrowVisibility = () => {
@@ -1009,9 +1009,11 @@ function initDesktopReviewsCarousel() {
   nextBtn.addEventListener('click', () => navigateTo(currentIndex + 1));
   prevBtn.addEventListener('click', () => navigateTo(currentIndex - 1));
 
-  // Initialize + recalculate on resize
-  updateCarousel(false);
-  window.addEventListener('resize', () => updateCarousel(false));
+  // Use ResizeObserver on the first slide (which captures the "stretching" better than the container)
+  const resizeObserver = new ResizeObserver(() => {
+    requestAnimationFrame(() => updateCarousel());
+  });
+  if (slides[0]) resizeObserver.observe(slides[0]);
 }
 
 window.addEventListener('load', () => {
