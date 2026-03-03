@@ -1312,6 +1312,9 @@ button {
   /* Card Body */
   .pkg-body {
     padding: 1.65rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
   }
 
   .pkg-name {
@@ -1326,7 +1329,7 @@ button {
     font-size: 0.85rem;
     color: #475569;
     line-height: 1.65;
-    margin-top: 0.35rem;
+    margin-top: 0.15rem;
   }
 
   /* Price Block */
@@ -5111,6 +5114,19 @@ button {
 
 /* Premium Desktop Hero Buttons */
 .hero-btn-phone {
+  background: var(--primary) !important;
+  color: white !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+}
+
+.hero-btn-phone:hover {
+  background: var(--primary-hover) !important;
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(37, 99, 235, 0.4);
+}
+
+.hero-btn-book {
   background: rgba(255, 255, 255, 0.1) !important;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -5119,23 +5135,10 @@ button {
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-.hero-btn-phone:hover {
+.hero-btn-book:hover {
   background: rgba(255, 255, 255, 0.2) !important;
   transform: translateY(-3px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-}
-
-.hero-btn-book {
-  background: var(--primary) !important;
-  color: white !important;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
-}
-
-.hero-btn-book:hover {
-  background: var(--primary-hover) !important;
-  transform: translateY(-3px);
-  box-shadow: 0 15px 35px rgba(37, 99, 235, 0.4);
 }
 
 /* Ceramic Coating Section Pull-up */
