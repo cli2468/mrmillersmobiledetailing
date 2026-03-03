@@ -1500,11 +1500,11 @@ button {
   }
 
   .ceramic-heading {
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-size: 1.3rem;
+    font-weight: 800;
     color: #0f172a;
-    text-transform: none;
-    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
   }
 
   .ceramic-sub {
@@ -1517,8 +1517,14 @@ button {
   .ceramic-btn {
     white-space: nowrap;
     border-radius: 0.5rem;
-    /* Match card buttons */
+    color: white !important;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
+
+  /* Match card buttons */
 }
 
 /* Pricing Disclaimer */
