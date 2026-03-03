@@ -73,6 +73,18 @@ function initComparisons() {
     // Get dimensions from container
     w = container.offsetWidth;
     h = container.offsetHeight;
+    const innerImg = img.querySelector('img');
+
+    // Ensure the overlay image stays the same width as the container
+    // so it matches the background image perfectly regardless of clipping
+    const syncImgWidth = () => {
+      if (innerImg) {
+        innerImg.style.width = container.offsetWidth + "px";
+        innerImg.style.height = container.offsetHeight + "px";
+      }
+    };
+    syncImgWidth();
+    window.addEventListener('resize', syncImgWidth);
 
     // Start at 20% width for the intro animation "hint"
     img.style.width = "20%";
@@ -927,9 +939,85 @@ function initReviewsCarousel() {
   }
 }
 
+// Desktop Reviews (Coverflow Carousel) Logic
+function initDesktopReviewsCarousel() {
+  const coverflow = document.getElementById('dRevCoverflow');
+  const track = document.getElementById('dRevTrack');
+  const slides = document.querySelectorAll('.d-rev-slide');
+  const nextBtn = document.getElementById('dRevNextBtn');
+  const prevBtn = document.getElementById('dRevPrevBtn');
+  const nav = document.querySelector('.d-rev-nav');
+
+  if (!coverflow || !track || slides.length === 0 || !nextBtn || !prevBtn || !nav) return;
+
+  let currentIndex = 1; // Start on 2nd card so sides are visible
+  let isAnimating = false;
+
+  const updateArrowVisibility = () => {
+    // Hide left arrow at first slide, hide right arrow at last slide
+    if (currentIndex === 0) {
+      prevBtn.classList.add('hidden');
+    } else {
+      prevBtn.classList.remove('hidden');
+    }
+    if (currentIndex === slides.length - 1) {
+      nextBtn.classList.add('hidden');
+    } else {
+      nextBtn.classList.remove('hidden');
+    }
+  };
+
+  const updateCarousel = () => {
+    // Toggle active class FIRST so margins are correct for layout
+    slides.forEach((s, i) => {
+      if (i === currentIndex) {
+        s.classList.add('active');
+      } else {
+        s.classList.remove('active');
+      }
+    });
+
+    // Force reflow so offsetLeft reflects the new margins
+    void track.offsetWidth;
+
+    const containerWidth = coverflow.offsetWidth;
+    const slide = slides[currentIndex];
+    const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+    const translateX = (containerWidth / 2) - slideCenter;
+
+    track.style.transform = `translateX(${translateX}px)`;
+
+    updateArrowVisibility();
+  };
+
+  const navigateTo = (newIndex) => {
+    if (isAnimating || newIndex < 0 || newIndex >= slides.length) return;
+    isAnimating = true;
+
+    // Fade out arrows + slide simultaneously (no delay)
+    nav.classList.add('transitioning');
+    currentIndex = newIndex;
+    updateCarousel();
+
+    // After slide transition finishes (~500ms), fade arrows back in
+    setTimeout(() => {
+      nav.classList.remove('transitioning');
+      isAnimating = false;
+    }, 550);
+  };
+
+  nextBtn.addEventListener('click', () => navigateTo(currentIndex + 1));
+  prevBtn.addEventListener('click', () => navigateTo(currentIndex - 1));
+
+  // Initialize + recalculate on resize
+  updateCarousel(false);
+  window.addEventListener('resize', () => updateCarousel(false));
+}
+
 window.addEventListener('load', () => {
   initFocalShowcase();
   initReviewsCarousel();
+  initDesktopReviewsCarousel();
 });
 
 // Scroll Animation Observer (Bio Text)
