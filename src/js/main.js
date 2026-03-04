@@ -184,7 +184,7 @@ const packages = {
     basePrice: '120',
     image: 'assets/gallery-interior-console.jpg',
     objectPosition: 'center center',
-    desc: 'A professional maintenance service for vehicles that need a regular refresh to keep the cabin in peak condition.',
+    desc: 'The perfect reset for everyday wear and tear. A thorough vacuuming, wipe-down, and glass cleaning to bring your cabin back to baseline.',
     pricing: [
       { type: 'Sedan / Coupe', cost: '$120' },
       { type: 'Small SUV / Truck', cost: '$150' },
@@ -202,7 +202,7 @@ const packages = {
     basePrice: '250',
     image: 'assets/interior-detail-v2.jpg',
     objectPosition: 'center 67%',
-    desc: "For vehicles that need a total reset. We go beneath the surface with deep steam-cleaning to lift embedded stains.",
+    desc: 'For interiors that need a total transformation. Deep steam cleaning and extraction to lift embedded stains and eliminate odors.',
     pricing: [
       { type: 'Sedan / Coupe', cost: '$250' },
       { type: 'Small SUV / Truck', cost: '$325' },
@@ -222,7 +222,7 @@ const packages = {
     basePrice: '95',
     image: 'assets/gallery-camaro.jpg',
     objectPosition: 'center 15%',
-    desc: 'A meticulous hand-wash and protection treatment that removes contaminants and seals your paint for a lasting gloss.',
+    desc: 'A complete paint-to-wheel exterior treatment. We remove deep contaminants and seal your paint for lasting gloss and protection.',
     pricing: [
       { type: 'Sedan / Coupe', cost: '$95' },
       { type: 'Small SUV / Truck', cost: '$120' },
@@ -335,7 +335,7 @@ if (packageTabs.length && packageCard) {
               
               <div class="pkg-actions pkg-reveal-up">
                 <a href="tel:2196698630" class="btn btn-dark btn-full">Call Now</a>
-                <a href="#contact" class="btn btn-outline-dark btn-full">Book Now</a>
+                <a href="#contact" data-package="${pkg.name.toLowerCase().replace(' ', '-')}" class="btn btn-outline-dark btn-full">Book Now</a>
               </div>
           </div>
         `;
@@ -408,6 +408,38 @@ document.querySelectorAll('h2.layered-title').forEach(el => {
   markerObserver.observe(el);
 });
 
+// -- Service Pre-filling Logic (Event Delegation) --
+document.addEventListener('click', (e) => {
+  const link = e.target.closest('a[href="#contact"][data-package]');
+  if (!link) return;
+
+  const packageValue = link.getAttribute('data-package');
+  const serviceInputs = document.querySelectorAll('input[name="service"], select[name="service"]');
+
+  serviceInputs.forEach(input => {
+    // For mobile native select
+    if (input.tagName === 'SELECT') {
+      input.value = packageValue;
+    }
+    // For desktop custom select
+    else if (input.tagName === 'INPUT' && input.type === 'hidden') {
+      input.value = packageValue;
+      // Trigger UI update for custom select
+      const customSelect = input.nextElementSibling;
+      if (customSelect && customSelect.classList.contains('custom-select')) {
+        const option = customSelect.querySelector(`.custom-select-option[data-value="${packageValue}"]`);
+        if (option) {
+          const trigger = customSelect.querySelector('.custom-select-trigger span');
+          trigger.textContent = option.textContent;
+          customSelect.querySelector('.custom-select-trigger').classList.remove('placeholder-text');
+          customSelect.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
+          option.classList.add('selected');
+        }
+      }
+    }
+  });
+});
+
 // -- Contact Form Logic --
 const contactForm = document.getElementById('contactForm');
 const phoneInput = document.getElementById('phoneInput');
@@ -459,6 +491,13 @@ if (contactForm) {
   contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
     let hasError = false;
+
+    // Basic required field check for full_name
+    const fullNameInput = contactForm.querySelector('input[name="full_name"]');
+    if (fullNameInput && !fullNameInput.value.trim()) {
+      fullNameInput.classList.add('input-error');
+      hasError = true;
+    }
 
     // Submit Validation - Email
     if (emailInput && !emailInput.value.includes('@')) {
