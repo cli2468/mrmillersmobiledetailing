@@ -2715,6 +2715,13 @@ button {
   width: 100%;
   flex-wrap: wrap;
   /* Allow error message to break to new line */
+  position: relative;
+  z-index: 1;
+}
+
+/* Give the form row containing the dropdown a higher z-index so the options overlay subsequent rows */
+.form-row:has(.mobile-custom-select) {
+  z-index: 10;
 }
 
 /* Error Message Styling */
@@ -2789,6 +2796,102 @@ button {
   pointer-events: none;
   font-size: 1.25rem;
   color: #000;
+}
+
+/* ===== Mobile Custom Dropdown ===== */
+.mobile-custom-select {
+  position: relative;
+  width: 100%;
+  z-index: 10;
+}
+
+.mobile-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background-color: #fff;
+  font-size: 1rem;
+  color: #000;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  user-select: none;
+  font-family: inherit;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.mobile-select-trigger.placeholder-text span {
+  color: #888;
+}
+
+.mobile-select-trigger:hover {
+  border-color: #ccc;
+}
+
+.mobile-custom-select.open .mobile-select-trigger {
+  border-color: #000;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.mobile-select-trigger i {
+  font-size: 1.25rem;
+  color: #000;
+  transition: transform 0.25s ease;
+  line-height: 1;
+}
+
+.mobile-custom-select.open .mobile-select-trigger i {
+  transform: rotate(180deg);
+}
+
+.mobile-select-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #000;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  z-index: 20;
+  transition: max-height 0.25s ease, opacity 0.2s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-custom-select.open .mobile-select-options {
+  max-height: 260px;
+  overflow: hidden;
+  opacity: 1;
+}
+
+.mobile-select-option {
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  color: #333;
+}
+
+.mobile-select-option:hover {
+  background-color: #f5f5f5;
+  color: #000;
+}
+
+.mobile-select-option.selected {
+  background-color: #000;
+  color: #fff;
+  font-weight: 600;
+}
+
+.mobile-select-option:last-child {
+  border-radius: 0 0 6px 6px;
 }
 
 /* Input with Icon Removed */

@@ -29,7 +29,32 @@
         "image": "https://mrmillersmobiledetailing.com/assets/hero-mustang-new.jpg",
         "telephone": "+1-219-669-8630",
         "priceRange": "$$",
-        "areaServed": "Northwest Indiana",
+        "areaServed": [
+          "Hobart, IN",
+          "Portage, IN",
+          "Merrillville, IN",
+          "Gary, IN",
+          "Griffith, IN",
+          "Crown Point, IN",
+          "Lake Station, IN",
+          "Valparaiso, IN"
+        ],
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "00:00",
+            "closes": "23:59"
+          }
+        ],
         "aggregateRating": {
           "@type": "AggregateRating",
           "ratingValue": "5.0",
@@ -45,7 +70,7 @@
                 "@type": "Service",
                 "name": "Showroom Exterior Detailing"
               },
-              "price": "95.00",
+              "price": "120.00",
               "priceCurrency": "USD"
             },
             {
@@ -54,7 +79,7 @@
                 "@type": "Service",
                 "name": "Interior Essential Detailing"
               },
-              "price": "120.00",
+              "price": "140.00",
               "priceCurrency": "USD"
             },
             {
@@ -1014,9 +1039,10 @@
 
         <!-- Mobile: original centered layout (hidden on desktop) -->
         <div class="contact-mobile-header">
-          <h2 class="contact-title animate-on-scroll">Get in Touch with Us.</h2>
-          <p class="contact-subtitle animate-on-scroll">Contact us today for personalized advice and professional
-            service.</p>
+          <h2 class="contact-title animate-on-scroll" style="font-size: 2.5rem; line-height: 1.1;">Get a Quote in an
+            Hour.</h2>
+          <p class="contact-subtitle animate-on-scroll">Fill out the form below and we'll get back to you with a custom
+            price and availability.</p>
         </div>
 
         <!-- Desktop: two-column split layout -->
@@ -1024,9 +1050,9 @@
           <!-- Left: Contact Info -->
           <div class="contact-info-col animate-on-scroll">
             <span class="contact-eyebrow">GET IN TOUCH</span>
-            <h2 class="contact-desktop-heading">Ready to Book?<br>Let's Talk.</h2>
-            <p class="contact-desktop-sub">Fill out the form and we'll get back to you within 24 hours to confirm your
-              appointment.</p>
+            <h2 class="contact-desktop-heading">Ready to book?<br>Get a quote in an hour.</h2>
+            <p class="contact-desktop-sub">Fill out the form below and we'll get back to you with a custom price and
+              availability.</p>
 
             <div class="contact-info-items">
               <div class="contact-info-item">
@@ -1055,13 +1081,13 @@
           <div class="contact-form-col">
             <form class="new-contact-form desktop-contact-form" action="https://formspree.io/f/xdaddjwe" method="POST">
               <div class="form-group">
-                <label class="form-label">Full Name*</label>
+                <label class="form-label">Full Name</label>
                 <input type="text" name="full_name" placeholder="John Smith" required class="form-input"
                   aria-label="Full Name">
               </div>
               <div class="form-row-pair">
                 <div class="form-group">
-                  <label class="form-label">Phone*</label>
+                  <label class="form-label">Phone</label>
                   <input type="tel" name="phone" placeholder="(555) 000-0000" required class="form-input"
                     aria-label="Phone Number">
                   <div class="error-message" id="desktopPhoneError">
@@ -1069,7 +1095,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="form-label">Email*</label>
+                  <label class="form-label">Email</label>
                   <input type="email" name="email" placeholder="john@email.com" required class="form-input"
                     aria-label="Email Address">
                   <div class="error-message" id="desktopEmailError">
@@ -1078,13 +1104,13 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="form-label">Year, Make & Model*</label>
+                <label class="form-label">Year, Make & Model</label>
                 <input type="text" name="vehicle" placeholder="e.g. 2019 Honda CR-V" required class="form-input"
                   aria-label="Vehicle Details">
               </div>
               <div class="form-row-pair">
                 <div class="form-group">
-                  <label class="form-label">Service Interested In*</label>
+                  <label class="form-label">Service Interested In</label>
                   <input type="hidden" name="service" required>
                   <div class="custom-select" data-name="service">
                     <div class="custom-select-trigger placeholder-text">
@@ -1099,31 +1125,14 @@
                     </div>
                   </div>
                 </div>
-                <div class="form-group">
-                  <label class="form-label">How Did You Hear About Us (Optional)</label>
-                  <input type="hidden" name="source">
-                  <div class="custom-select" data-name="source">
-                    <div class="custom-select-trigger placeholder-text">
-                      <span>Select one</span>
-                      <i class='bx bx-chevron-down'></i>
-                    </div>
-                    <div class="custom-select-options">
-                      <div class="custom-select-option" data-value="google">Google</div>
-                      <div class="custom-select-option" data-value="facebook">Facebook</div>
-                      <div class="custom-select-option" data-value="instagram">Instagram</div>
-                      <div class="custom-select-option" data-value="friend">Friend/Family</div>
-                      <div class="custom-select-option" data-value="other">Other</div>
-                    </div>
-                  </div>
-                </div>
               </div>
               <div class="form-group">
-                <label class="form-label">Message</label>
+                <label class="form-label">Message (Optional)</label>
                 <textarea name="message"
                   placeholder="Any additional details about your vehicle or scheduling preferences..." rows="4"
                   class="form-input" aria-label="Message"></textarea>
               </div>
-              <button type="submit" class="btn btn-primary-full">Get My Free Quote</button>
+              <button type="submit" class="btn btn-primary-full" style="letter-spacing: 1px;">Get My Free Quote</button>
             </form>
           </div>
         </div>
@@ -1132,74 +1141,90 @@
         <form class="new-contact-form mobile-contact-form" id="contactForm" action="https://formspree.io/f/xdaddjwe"
           method="POST">
 
+
           <!-- Row 1: Name -->
           <div class="form-row animate-on-scroll delay-1">
-            <input type="text" name="full_name" placeholder="Full Name*" required class="form-input"
-              aria-label="Full Name">
+            <div class="form-group" style="width: 100%;">
+              <label class="form-label" style="color: #1a1a2e; margin-bottom: 0.4rem; display: block;">Full Name</label>
+              <input type="text" name="full_name" placeholder="John Smith" required class="form-input"
+                aria-label="Full Name">
+            </div>
           </div>
 
           <!-- Row 2: Phone (No Icon) -->
           <div class="form-row animate-on-scroll delay-2">
-            <input type="tel" id="phoneInput" name="phone" placeholder="(555) 000-0000*" required class="form-input"
-              aria-label="Phone Number">
-            <div class="error-message" id="phoneError">
-              <i class='bx bx-error-circle'></i> Please enter a valid phone number.
+            <div class="form-group" style="width: 100%;">
+              <label class="form-label" style="color: #1a1a2e; margin-bottom: 0.4rem; display: block;">Phone</label>
+              <input type="tel" id="phoneInput" name="phone" placeholder="(555) 000-0000" required class="form-input"
+                aria-label="Phone Number">
+              <div class="error-message" id="phoneError">
+                <i class='bx bx-error-circle'></i> Please enter a valid phone number.
+              </div>
             </div>
           </div>
 
           <!-- Row 3: Email -->
           <div class="form-row animate-on-scroll delay-3">
-            <input type="email" name="email" placeholder="Email*" required class="form-input"
-              aria-label="Email Address">
-            <div class="error-message" id="emailError">
-              <i class='bx bx-error-circle'></i> Enter an email address like example@mysite.com.
+            <div class="form-group" style="width: 100%;">
+              <label class="form-label" style="color: #1a1a2e; margin-bottom: 0.4rem; display: block;">Email</label>
+              <input type="email" name="email" placeholder="john@email.com" required class="form-input"
+                aria-label="Email Address">
+              <div class="error-message" id="emailError">
+                <i class='bx bx-error-circle'></i> Enter a valid email address.
+              </div>
             </div>
           </div>
 
           <!-- Row 4: Vehicle -->
           <div class="form-row animate-on-scroll delay-1">
-            <input type="text" name="vehicle" placeholder="Year, Make, and Model*" required class="form-input"
-              aria-label="Vehicle Details">
+            <div class="form-group" style="width: 100%;">
+              <label class="form-label" style="color: #1a1a2e; margin-bottom: 0.4rem; display: block;">Year, Make, and
+                Model</label>
+              <input type="text" name="vehicle" placeholder="e.g. 2019 Honda CR-V" required class="form-input"
+                aria-label="Vehicle Details">
+            </div>
           </div>
 
           <!-- Row 5: Services -->
           <div class="form-row animate-on-scroll delay-2">
-            <div class="select-wrapper">
-              <select class="form-input" name="service" required aria-label="Main Services Interested In">
-                <option value="" disabled selected>Main Services Interested In</option>
-                <option value="interior-essential">Interior Essential</option>
-                <option value="interior-restoration">Interior Restoration</option>
-                <option value="showroom-exterior">Showroom Exterior</option>
-                <option value="ceramic">Ceramic Coating</option>
-              </select>
-              <i class='bx bx-chevron-down select-arrow'></i>
+            <div class="form-group" style="width: 100%;">
+              <label class="form-label" style="color: #1a1a2e; margin-bottom: 0.4rem; display: block;">Service
+                Interested In</label>
+              <input type="hidden" name="service" required>
+              <div class="mobile-custom-select" data-name="service">
+                <div class="mobile-select-trigger placeholder-text">
+                  <span>Select a package</span>
+                  <i class='bx bx-chevron-down'></i>
+                </div>
+                <div class="mobile-select-options">
+                  <div class="mobile-select-option" data-value="interior-essential">Interior Essential</div>
+                  <div class="mobile-select-option" data-value="interior-restoration">Interior Restoration</div>
+                  <div class="mobile-select-option" data-value="showroom-exterior">Showroom Exterior</div>
+                  <div class="mobile-select-option" data-value="ceramic">Ceramic Coating</div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- Row 6: Source -->
-          <div class="form-row animate-on-scroll delay-3">
-            <div class="select-wrapper">
-              <select class="form-input" name="source" aria-label="How Did You Hear About Us">
-                <option value="" disabled selected>How Did You Hear About Us</option>
-                <option value="google">Google</option>
-                <option value="facebook">Facebook</option>
-                <option value="instagram">Instagram</option>
-                <option value="friend">Friend/Family</option>
-                <option value="other">Other</option>
-              </select>
-              <i class='bx bx-chevron-down select-arrow'></i>
-            </div>
-          </div>
+          <!-- Row 6Removed Source -->
 
           <!-- Row 7: Message -->
           <div class="form-row animate-on-scroll">
-            <textarea name="message" placeholder="Message" rows="5" class="form-input" aria-label="Message"></textarea>
+            <div class="form-group" style="width: 100%;">
+              <label class="form-label" style="color: #1a1a2e; margin-bottom: 0.4rem; display: block;">Message
+                (Optional)</label>
+              <textarea name="message"
+                placeholder="Any additional details about your vehicle or scheduling preferences..." rows="5"
+                class="form-input" aria-label="Message"></textarea>
+            </div>
           </div>
 
           <!-- Row 8: Button -->
           <div class="form-row animate-on-scroll">
-            <button type="submit" id="submitBtn" class="btn btn-black-full">Get My Free Quote</button>
+            <button type="submit" id="submitBtn" class="btn btn-black-full" style="letter-spacing: 1px;">Get My Free
+              Quote</button>
           </div>
+
 
         </form>
       </div>

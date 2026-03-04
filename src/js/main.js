@@ -417,14 +417,14 @@ document.addEventListener('click', (e) => {
   const serviceInputs = document.querySelectorAll('input[name="service"], select[name="service"]');
 
   serviceInputs.forEach(input => {
-    // For mobile native select
+    // For mobile native select (legacy fallback)
     if (input.tagName === 'SELECT') {
       input.value = packageValue;
     }
     // For desktop custom select
     else if (input.tagName === 'INPUT' && input.type === 'hidden') {
       input.value = packageValue;
-      // Trigger UI update for custom select
+      // Trigger UI update for desktop custom select
       const customSelect = input.nextElementSibling;
       if (customSelect && customSelect.classList.contains('custom-select')) {
         const option = customSelect.querySelector(`.custom-select-option[data-value="${packageValue}"]`);
@@ -433,6 +433,17 @@ document.addEventListener('click', (e) => {
           trigger.textContent = option.textContent;
           customSelect.querySelector('.custom-select-trigger').classList.remove('placeholder-text');
           customSelect.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
+          option.classList.add('selected');
+        }
+      }
+      // Trigger UI update for mobile custom select
+      if (customSelect && customSelect.classList.contains('mobile-custom-select')) {
+        const option = customSelect.querySelector(`.mobile-select-option[data-value="${packageValue}"]`);
+        if (option) {
+          const trigger = customSelect.querySelector('.mobile-select-trigger span');
+          trigger.textContent = option.textContent;
+          customSelect.querySelector('.mobile-select-trigger').classList.remove('placeholder-text');
+          customSelect.querySelectorAll('.mobile-select-option').forEach(o => o.classList.remove('selected'));
           option.classList.add('selected');
         }
       }
@@ -538,6 +549,15 @@ if (contactForm) {
         submitBtn.style.backgroundColor = "#22c55e"; // Success green
         contactForm.reset();
 
+        // Reset mobile custom selects
+        contactForm.querySelectorAll('.mobile-custom-select').forEach(select => {
+          const trigger = select.querySelector('.mobile-select-trigger span');
+          const options = select.querySelectorAll('.mobile-select-option');
+          trigger.textContent = 'Main Services Interested In';
+          select.querySelector('.mobile-select-trigger').classList.add('placeholder-text');
+          options.forEach(o => o.classList.remove('selected'));
+        });
+
         // Reset button after 5 seconds
         setTimeout(() => {
           submitBtn.disabled = false;
@@ -560,6 +580,51 @@ if (contactForm) {
       submitBtn.disabled = false;
       submitBtn.innerText = originalBtnText;
     });
+  });
+}
+
+// -- Mobile Custom Dropdown Logic --
+const mobileForm = document.getElementById('contactForm');
+if (mobileForm) {
+  const mobileSelects = mobileForm.querySelectorAll('.mobile-custom-select');
+  mobileSelects.forEach(select => {
+    const trigger = select.querySelector('.mobile-select-trigger');
+    const options = select.querySelectorAll('.mobile-select-option');
+    const hiddenInput = select.previousElementSibling; // The hidden input
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      // Close all other open mobile selects first
+      mobileSelects.forEach(other => {
+        if (other !== select) other.classList.remove('open');
+      });
+      select.classList.toggle('open');
+    });
+
+    options.forEach(option => {
+      option.addEventListener('click', () => {
+        // Update trigger text
+        trigger.querySelector('span').textContent = option.textContent;
+        trigger.classList.remove('placeholder-text');
+
+        // Update hidden input value
+        hiddenInput.value = option.dataset.value;
+
+        // Mark selected
+        options.forEach(o => o.classList.remove('selected'));
+        option.classList.add('selected');
+
+        // Close dropdown
+        select.classList.remove('open');
+      });
+    });
+  });
+
+  // Close mobile dropdowns on outside click
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.mobile-custom-select')) {
+      mobileSelects.forEach(select => select.classList.remove('open'));
+    }
   });
 }
 
