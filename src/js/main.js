@@ -429,22 +429,22 @@ document.addEventListener('click', (e) => {
       if (customSelect && customSelect.classList.contains('custom-select')) {
         const option = customSelect.querySelector(`.custom-select-option[data-value="${packageValue}"]`);
         if (option) {
-          const trigger = customSelect.querySelector('.custom-select-trigger span');
-          trigger.textContent = option.textContent;
-          customSelect.querySelector('.custom-select-trigger').classList.remove('placeholder-text');
           customSelect.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
           option.classList.add('selected');
+          customSelect.querySelector('.custom-select-trigger span').textContent = option.textContent;
+          customSelect.querySelector('.custom-select-trigger').classList.remove('placeholder-text');
+          input.value = packageValue;
         }
       }
       // Trigger UI update for mobile custom select
       if (customSelect && customSelect.classList.contains('mobile-custom-select')) {
         const option = customSelect.querySelector(`.mobile-select-option[data-value="${packageValue}"]`);
         if (option) {
-          const trigger = customSelect.querySelector('.mobile-select-trigger span');
-          trigger.textContent = option.textContent;
-          customSelect.querySelector('.mobile-select-trigger').classList.remove('placeholder-text');
           customSelect.querySelectorAll('.mobile-select-option').forEach(o => o.classList.remove('selected'));
           option.classList.add('selected');
+          customSelect.querySelector('.mobile-select-trigger span').textContent = option.textContent;
+          customSelect.querySelector('.mobile-select-trigger').classList.remove('placeholder-text');
+          input.value = packageValue;
         }
       }
     }
@@ -602,20 +602,25 @@ if (mobileForm) {
     });
 
     options.forEach(option => {
-      option.addEventListener('click', () => {
-        // Update trigger text
-        trigger.querySelector('span').textContent = option.textContent;
-        trigger.classList.remove('placeholder-text');
+      option.addEventListener('click', (e) => {
+        e.stopPropagation();
 
-        // Update hidden input value
-        hiddenInput.value = option.dataset.value;
+        // Toggle selection
+        option.classList.toggle('selected');
 
-        // Mark selected
-        options.forEach(o => o.classList.remove('selected'));
-        option.classList.add('selected');
+        // Collect all selected options
+        const selected = [...options].filter(o => o.classList.contains('selected'));
 
-        // Close dropdown
-        select.classList.remove('open');
+        // Update hidden input and trigger text
+        hiddenInput.value = selected.map(o => o.dataset.value).join(', ');
+        const triggerSpan = trigger.querySelector('span');
+        if (selected.length === 0) {
+          triggerSpan.textContent = 'Select a package';
+          trigger.classList.add('placeholder-text');
+        } else {
+          triggerSpan.textContent = selected.map(o => o.textContent).join(', ');
+          trigger.classList.remove('placeholder-text');
+        }
       });
     });
   });
@@ -696,20 +701,25 @@ if (desktopForm) {
     });
 
     options.forEach(option => {
-      option.addEventListener('click', () => {
-        // Update trigger text
-        trigger.querySelector('span').textContent = option.textContent;
-        trigger.classList.remove('placeholder-text');
+      option.addEventListener('click', (e) => {
+        e.stopPropagation();
 
-        // Update hidden input value
-        hiddenInput.value = option.dataset.value;
+        // Toggle selection
+        option.classList.toggle('selected');
 
-        // Mark selected
-        options.forEach(o => o.classList.remove('selected'));
-        option.classList.add('selected');
+        // Collect all selected options
+        const selected = [...options].filter(o => o.classList.contains('selected'));
 
-        // Close dropdown
-        select.classList.remove('open');
+        // Update hidden input and trigger text
+        hiddenInput.value = selected.map(o => o.dataset.value).join(', ');
+        const triggerSpan = trigger.querySelector('span');
+        if (selected.length === 0) {
+          triggerSpan.textContent = 'Select a package';
+          trigger.classList.add('placeholder-text');
+        } else {
+          triggerSpan.textContent = selected.map(o => o.textContent).join(', ');
+          trigger.classList.remove('placeholder-text');
+        }
       });
     });
   });
