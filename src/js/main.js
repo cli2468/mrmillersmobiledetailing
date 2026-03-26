@@ -181,14 +181,14 @@ const packages = {
   essential: {
     category: 'INTERIOR ESSENTIAL',
     name: 'Interior Essential',
-    basePrice: '120',
+    basePrice: '140',
     image: 'assets/gallery-interior-console.jpg',
     objectPosition: 'center center',
     desc: 'The perfect reset for everyday wear and tear. A thorough vacuuming, wipe-down, and glass cleaning to bring your cabin back to baseline.',
     pricing: [
-      { type: 'Sedan / Coupe', cost: '$120' },
+      { type: 'Sedan / Coupe', cost: '$140' },
       { type: 'Small SUV / Truck', cost: '$150' },
-      { type: 'Large SUV / Minivan', cost: '$180' }
+      { type: 'Large SUV / Minivan', cost: '$200' }
     ],
     features: [
       { title: 'Full Cabin Vacuum', desc: 'Detailed extraction of dust and debris from all carpets, mats, and hard-to-reach crevices.' },
@@ -199,14 +199,14 @@ const packages = {
   premium: {
     category: 'INTERIOR RESTORATION',
     name: 'Interior Restoration',
-    basePrice: '250',
+    basePrice: '200',
     image: 'assets/interior-detail-v2.jpg',
     objectPosition: 'center 67%',
     desc: 'For interiors that need a total transformation. Deep steam cleaning and extraction to lift embedded stains and eliminate odors.',
     pricing: [
-      { type: 'Sedan / Coupe', cost: '$250' },
-      { type: 'Small SUV / Truck', cost: '$325' },
-      { type: 'Large SUV / Minivan', cost: '$400' }
+      { type: 'Sedan / Coupe', cost: '$200' },
+      { type: 'Small SUV / Truck', cost: '$250' },
+      { type: 'Large SUV / Minivan', cost: '$275' }
     ],
     features: [
       { title: 'Includes all services from Interior Essential and more', desc: '' },
@@ -219,14 +219,14 @@ const packages = {
   ultimate: {
     category: 'SHOWROOM EXTERIOR',
     name: 'Showroom Exterior',
-    basePrice: '95',
+    basePrice: '120',
     image: 'assets/gallery-camaro.jpg',
     objectPosition: 'center 15%',
     desc: 'A complete paint-to-wheel exterior treatment. We remove deep contaminants and seal your paint for lasting gloss and protection.',
     pricing: [
-      { type: 'Sedan / Coupe', cost: '$95' },
-      { type: 'Small SUV / Truck', cost: '$120' },
-      { type: 'Large SUV / Minivan', cost: '$150' }
+      { type: 'Sedan / Coupe', cost: '$120' },
+      { type: 'Small SUV / Truck', cost: '$150' },
+      { type: 'Large SUV / Minivan', cost: '$175' }
     ],
     features: [
       { title: 'Foam Hand Wash', desc: 'Multi-stage foam bath and gentle hand wash using premium pH-balanced soaps.' },
