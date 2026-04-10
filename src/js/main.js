@@ -181,14 +181,14 @@ const packages = {
   essential: {
     category: 'INTERIOR ESSENTIAL',
     name: 'Interior Essential',
-    basePrice: '140',
+    basePrice: '150',
     image: 'assets/gallery-interior-console.jpg',
     objectPosition: 'center center',
     desc: 'The perfect reset for everyday wear and tear. A thorough vacuuming, wipe-down, and glass cleaning to bring your cabin back to baseline.',
     pricing: [
-      { type: 'Sedan / Coupe', cost: '$140' },
-      { type: 'Small SUV / Truck', cost: '$150' },
-      { type: 'Large SUV / Minivan', cost: '$200' }
+      { type: 'Sedan / Coupe', cost: '$150' },
+      { type: 'Small SUV / Truck', cost: '$160' },
+      { type: 'Large SUV / Minivan', cost: '$210' }
     ],
     features: [
       { title: 'Full Cabin Vacuum', desc: 'Detailed extraction of dust and debris from all carpets, mats, and hard-to-reach crevices.' },
