@@ -1207,8 +1207,11 @@
               <div class="form-row-pair">
                 <div class="form-group">
                   <label class="form-label">Phone</label>
-                  <input type="tel" name="phone" placeholder="(555) 000-0000" required class="form-input"
-                    aria-label="Phone Number">
+                  <div class="phone-input-shell">
+                    <span class="phone-input-prefix" aria-hidden="true">+1</span>
+                    <input type="tel" name="phone" placeholder="(555) 000-0000" required
+                      class="form-input phone-field-input" autocomplete="tel-national" aria-label="Phone Number">
+                  </div>
                   <div class="error-message" id="desktopPhoneError">
                     <i class='bx bx-error-circle'></i> Please enter a valid phone number.
                   </div>
@@ -1274,8 +1277,11 @@
           <div class="form-row animate-on-scroll delay-2">
             <div class="form-group" style="width: 100%;">
               <label class="form-label" style="color: #1a1a2e; margin-bottom: 0.4rem; display: block;">Phone</label>
-              <input type="tel" id="phoneInput" name="phone" placeholder="(555) 000-0000" required class="form-input"
-                aria-label="Phone Number">
+              <div class="phone-input-shell">
+                <span class="phone-input-prefix" aria-hidden="true">+1</span>
+                <input type="tel" id="phoneInput" name="phone" placeholder="(555) 000-0000" required
+                  class="form-input phone-field-input" autocomplete="tel-national" aria-label="Phone Number">
+              </div>
               <div class="error-message" id="phoneError">
                 <i class='bx bx-error-circle'></i> Please enter a valid phone number.
               </div>

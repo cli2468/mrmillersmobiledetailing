@@ -457,17 +457,52 @@ const phoneInput = document.getElementById('phoneInput');
 const phoneError = document.getElementById('phoneError');
 const emailError = document.getElementById('emailError');
 
+function normalizeUSPhoneDigits(value) {
+  let digits = value.replace(/\D/g, '');
+
+  // The UI already shows +1, so absorb a typed or autofilled leading country code.
+  if (digits === '1') {
+    return '';
+  }
+
+  if (digits.startsWith('1')) {
+    digits = digits.slice(1);
+  }
+
+  return digits.slice(0, 10);
+}
+
+function formatUSPhone(value) {
+  const digits = normalizeUSPhoneDigits(value);
+  const match = digits.match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+
+  if (!match) return '';
+  if (!match[2]) return match[1];
+
+  return `(${match[1]}) ${match[2]}${match[3] ? `-${match[3]}` : ''}`;
+}
+
+function hasValidUSPhone(value) {
+  return normalizeUSPhoneDigits(value).length === 10;
+}
+
+function serializeUSPhone(value) {
+  const formatted = formatUSPhone(value);
+
+  return hasValidUSPhone(value) ? `+1 ${formatted}` : formatted;
+}
+
 if (phoneInput) {
   // Phone Masking (XXX) XXX-XXXX
   phoneInput.addEventListener('input', (e) => {
-    let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
-    e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+    e.target.value = formatUSPhone(e.target.value);
   });
 
   // Phone Validation on Blur
   phoneInput.addEventListener('blur', () => {
-    // Check if length is correct (14 chars for (555) 555-5555)
-    if (phoneInput.value.length > 0 && phoneInput.value.length < 14) {
+    phoneInput.value = formatUSPhone(phoneInput.value);
+
+    if (phoneInput.value.length > 0 && !hasValidUSPhone(phoneInput.value)) {
       phoneError.classList.add('visible');
     } else {
       phoneError.classList.remove('visible');
@@ -517,7 +552,11 @@ if (contactForm) {
     }
 
     // Submit Validation - Phone
-    if (phoneInput && phoneInput.value.length < 14) {
+    if (phoneInput) {
+      phoneInput.value = formatUSPhone(phoneInput.value);
+    }
+
+    if (phoneInput && !hasValidUSPhone(phoneInput.value)) {
       phoneError.classList.add('visible');
       hasError = true;
     }
@@ -535,6 +574,7 @@ if (contactForm) {
     submitBtn.innerText = "Sending...";
 
     const formData = new FormData(contactForm);
+    formData.set('phone', serializeUSPhone(phoneInput.value));
 
     fetch(contactForm.action, {
       method: contactForm.method,
@@ -644,13 +684,14 @@ if (desktopForm) {
   // Phone Auto-Formatting (XXX) XXX-XXXX
   if (dPhoneInput) {
     dPhoneInput.addEventListener('input', () => {
-      let x = dPhoneInput.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
-      dPhoneInput.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+      dPhoneInput.value = formatUSPhone(dPhoneInput.value);
     });
 
     // Phone Validation on Blur
     dPhoneInput.addEventListener('blur', () => {
-      if (dPhoneInput.value.length > 0 && dPhoneInput.value.length < 14) {
+      dPhoneInput.value = formatUSPhone(dPhoneInput.value);
+
+      if (dPhoneInput.value.length > 0 && !hasValidUSPhone(dPhoneInput.value)) {
         dPhoneError.classList.add('visible');
         dPhoneInput.classList.add('input-error');
       } else {
@@ -735,7 +776,11 @@ if (desktopForm) {
     let hasError = false;
 
     // Validate phone
-    if (dPhoneInput && dPhoneInput.value.length < 14) {
+    if (dPhoneInput) {
+      dPhoneInput.value = formatUSPhone(dPhoneInput.value);
+    }
+
+    if (dPhoneInput && !hasValidUSPhone(dPhoneInput.value)) {
       dPhoneError.classList.add('visible');
       dPhoneInput.classList.add('input-error');
       hasError = true;
@@ -758,6 +803,7 @@ if (desktopForm) {
     submitBtn.innerText = "Sending...";
 
     const formData = new FormData(desktopForm);
+    formData.set('phone', serializeUSPhone(dPhoneInput.value));
 
     fetch(desktopForm.action, {
       method: desktopForm.method,

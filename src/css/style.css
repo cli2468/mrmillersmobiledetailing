@@ -2850,6 +2850,43 @@ button {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
+.phone-input-shell {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 1rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background-color: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.phone-input-shell:focus-within {
+  border-color: #000;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.phone-input-prefix {
+  flex-shrink: 0;
+  color: #111827;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  padding-right: 0.85rem;
+  border-right: 1px solid rgba(15, 23, 42, 0.12);
+}
+
+.phone-field-input {
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  border-radius: 0;
+  padding: 1rem 0 1rem 0.85rem;
+  min-width: 0;
+}
+
 .form-input::placeholder {
   color: #888;
 }
@@ -2858,6 +2895,11 @@ button {
   outline: none;
   border-color: #000;
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.phone-field-input:focus {
+  border-color: transparent;
+  box-shadow: none;
 }
 
 /* Custom Select Styling */
@@ -3225,6 +3267,37 @@ button {
   .desktop-contact-form .form-input:focus {
     border-color: #2563eb;
     box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+
+  .desktop-contact-form .phone-input-shell {
+    padding: 0 1.05rem 0 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    box-shadow: none;
+  }
+
+  .desktop-contact-form .phone-input-shell:focus-within {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+
+  .desktop-contact-form .phone-input-shell:has(.input-error) {
+    border-color: #dc2626;
+  }
+
+  .desktop-contact-form .phone-input-shell:has(.input-error):focus-within {
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+  }
+
+  .desktop-contact-form .phone-field-input {
+    padding: 0.9rem 0 0.9rem 0.9rem;
+    border: none;
+    box-shadow: none;
+  }
+
+  .desktop-contact-form .phone-field-input:focus {
+    border-color: transparent;
+    box-shadow: none;
   }
 
   .desktop-contact-form .form-input::placeholder {
