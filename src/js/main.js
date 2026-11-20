@@ -199,14 +199,14 @@ const packages = {
   premium: {
     category: 'INTERIOR RESTORATION',
     name: 'Interior Restoration',
-    basePrice: '200',
+    basePrice: '250',
     image: 'assets/interior-detail-v2.jpg',
     objectPosition: 'center 67%',
     desc: 'For interiors that need a total transformation. Deep steam cleaning and extraction to lift embedded stains and eliminate odors.',
     pricing: [
-      { type: 'Sedan / Coupe', cost: '$200' },
-      { type: 'Small SUV / Truck', cost: '$250' },
-      { type: 'Large SUV / Minivan', cost: '$275' }
+      { type: 'Sedan / Coupe', cost: '$250' },
+      { type: 'Small SUV / Truck', cost: '$300' },
+      { type: 'Large SUV / Minivan', cost: '$400' }
     ],
     features: [
       { title: 'Includes all services from Interior Essential and more', desc: '' },
